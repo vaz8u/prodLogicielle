@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import java.util.Optional;
 
+import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDto;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -32,19 +33,18 @@ class SondageServiceTest {
 
     @Test
     @DisplayName("Test getById method")
-    void testGetSondageById() {
+    void testGetById() {
         Sondage sampleSondage = new Sondage();
         when(repository.getById(anyLong())).thenReturn(sampleSondage);
 
         Sondage result = sondageService.getById(1L);
 
-        assertNotNull(result, "Sondage should not be null");
-        assertEquals(sampleSondage, result, "Returned Sondage should match the mocked one");
+        assertDto(sampleSondage,result);
     }
 
     @Test
     @DisplayName("Test getAll method")
-    void testGetAllSondages() {
+    void testGetAll() {
         Sondage sampleSondage = new Sondage();
         when(repository.findAll()).thenReturn(List.of(sampleSondage));
 
@@ -56,7 +56,7 @@ class SondageServiceTest {
 
     @Test
     @DisplayName("Test create method")
-    void testCreateSondage() {
+    void testCreate() {
         Participant sampleParticipant = new Participant();
         when(participantService.getById(anyLong())).thenReturn(sampleParticipant);
 
@@ -65,34 +65,36 @@ class SondageServiceTest {
 
         Sondage result = sondageService.create(1L, sondageToCreate);
 
-        assertNotNull(result, "Created sondage should not be null");
-        assertEquals(sondageToCreate, result, "Returned Sondage should match the one to create");
+        assertDto(sondageToCreate,result);
     }
 
     @Test
     @DisplayName("Test update Sondage")
     void testUpdate() {
         Long sondageId = 1L;
+        String expectedName = "Updated Sondage";
         Sondage existingSondage = new Sondage();
         existingSondage.setSondageId(sondageId);
 
         Sondage updatedSondage = new Sondage();
         updatedSondage.setSondageId(sondageId);
-        updatedSondage.setNom("Updated Sondage");
+        updatedSondage.setNom(expectedName);
 
         when(repository.findById(sondageId)).thenReturn(Optional.of(existingSondage));
         when(repository.save(any(Sondage.class))).thenReturn(updatedSondage);
 
         Sondage result = sondageService.update(sondageId, updatedSondage);
 
-        assertEquals(updatedSondage, result, "Sondage should be updated");
+        assertDto(updatedSondage,result);
+        assertEquals(expectedName,result.getNom());
+
         verify(repository, times(1)).findById(sondageId);
         verify(repository, times(1)).save(updatedSondage);
     }
 
     @Test
     @DisplayName("Test update Non-Existent Sondage")
-    void testUpdateNonExistentSondage() {
+    void testUpdateNonExistent() {
         Long sondageId = 1L;
         Sondage updatedSondage = new Sondage();
         updatedSondage.setSondageId(sondageId);
@@ -125,7 +127,7 @@ class SondageServiceTest {
 
     @Test
     @DisplayName("Test delete Non-Existent Sondage")
-    void testDeleteNonExistentSondage() {
+    void testDeleteNonExistent() {
         Long sondageId = 1L;
 
         when(repository.findById(sondageId)).thenReturn(Optional.empty());
