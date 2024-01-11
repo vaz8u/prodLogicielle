@@ -171,7 +171,7 @@ class SondageControllerTest {
 
         verify(mapper, times(1)).map(sondageDto, Sondage.class);
         verify(mapper, times(1)).map(expectedModel, SondageDto.class);
-        verify(sondageService, times(1)).create(eq(expectedParticipantId), eq(expectedModel));
+        verify(sondageService, times(1)).create(expectedParticipantId, expectedModel);
     }
 
     @Test
