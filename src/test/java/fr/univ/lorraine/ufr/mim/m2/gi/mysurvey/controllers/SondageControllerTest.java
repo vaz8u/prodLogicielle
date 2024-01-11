@@ -23,8 +23,9 @@ import org.modelmapper.ModelMapper;
 import java.util.Arrays;
 import java.util.List;
 
+import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDto;
+import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDtoListSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
@@ -58,16 +59,6 @@ class SondageControllerTest {
                 // Map other properties if needed
                 return target;
         });
-    }
-
-    private <T> void assertDto(T expectedDto, T actualDto) {
-        assertNotNull(actualDto, "Result should not be null");
-        assertEquals(expectedDto, actualDto, "DTOs should be equal");
-    }
-
-    private <T,U> void assertDtoListSize(List<T> expectedDtos, List<U> actualDtos) {
-        assertNotNull(actualDtos, "Result should not be null");
-        assertEquals(expectedDtos.size(), actualDtos.size(), "Number of Dtos should match");
     }
 
     @Test
