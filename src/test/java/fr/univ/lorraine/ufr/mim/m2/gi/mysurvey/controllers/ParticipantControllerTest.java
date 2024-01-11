@@ -19,7 +19,7 @@ import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDtoLis
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ParticipantControllerTest {
+class ParticipantControllerTest {
     @Mock
     private ParticipantService participantService;
 

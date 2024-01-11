@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ParticipantServiceTest {
+class ParticipantServiceTest {
     @Mock
     private ParticipantRepository repository;
 
