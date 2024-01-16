@@ -5,7 +5,7 @@ FROM openjdk:11-jdk
 WORKDIR /usr/src/app
 
 # Copiez le fichier .jar de votre application
-COPY /target/MySurvey-0.0.1-SNAPSHOT.jar app.jar
+COPY ./app.jar app.jar
 
 # Exposez le port sur lequel votre application s'exécute
 EXPOSE 8080
