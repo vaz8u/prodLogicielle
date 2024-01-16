@@ -28,3 +28,5 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Move jar to root
       run: mv target/*.jar ./ || true
+    - name: Rename jar to app.jar
+      run: mv *.jar app.jar || true
