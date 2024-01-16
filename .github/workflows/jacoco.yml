@@ -1,4 +1,4 @@
-name: Tests
+name: Jacoco Code Coverage
 
 on:
   push:
@@ -7,8 +7,7 @@ on:
     branches: [ "develop" ]
 
 jobs:
-  run-tests:
-    name: Run all tests
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,12 +19,11 @@ jobs:
         with:
           java-version: 11
 
-      - name: Cache Maven packages
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
       - name: Build and test
-        run: mvn -B verify
+        run: mvn clean verify
+
+      - name: Upload Jacoco report
+        uses: actions/upload-artifact@v2
+        with:
+          name: jacoco-report
+          path: target/site/jacoco

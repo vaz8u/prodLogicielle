@@ -1,0 +1,20 @@
+name: Generate Jacoco Badge
+
+on:
+  workflow_run:
+    workflows: ["Jacoco Code Coverage"]
+    types:
+      - completed
+
+jobs:
+  generate-jacoco-badge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Generate Jacoco Badge
+        uses: cicirello/jacoco-badge-generator@v2
+        with:
+          report-path: target/site/jacoco/jacoco.xml
