@@ -30,12 +30,7 @@ jobs:
       run: mv target/*.jar ./ || true
     - name: Rename jar to app.jar
       run: mv *.jar app.jar || true
-
-    - uses: actions/download-artifact@master
-      with:
-        name: jar-file
-        path: app.jar
-
+      
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
       
