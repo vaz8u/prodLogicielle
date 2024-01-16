@@ -1,0 +1,16 @@
+version: '3'
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      ports: "5432:5432"
+      POSTGRES_DB: db
+  web:
+    image: openjdk:11-jdk
+    volumes:
+      - ./target/MySurvey-0.0.1-SNAPSHOT.jar:/usr/src/app/app.jar
+    ports:
+      - "8080:8080"
+    command: ["java", "-jar", "/usr/src/app/app.jar"]
