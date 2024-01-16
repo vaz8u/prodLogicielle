@@ -51,4 +51,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: thearaseng/dockerized-spring-boot-app:${{ env.DATE }}
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/prod_logicielle
