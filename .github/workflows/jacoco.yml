@@ -2,7 +2,7 @@ name: Jacoco Code Coverage
 
 on:
   push:
-    branches: [ "develop", "32-afficher-correctement-le-badge-de-code-coverage" ]
+    branches: [ "develop" ]
   pull_request:
     branches: [ "develop" ]
 
