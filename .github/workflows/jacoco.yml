@@ -30,7 +30,6 @@ jobs:
           path: target/site/jacoco
 
   generate-badge:
-    runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Download Jacoco report
