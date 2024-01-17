@@ -29,28 +29,28 @@ public class Sondage {
     @Column(name = &quot;cloture&quot;)
     private Boolean cloture;
 
-<span class="pc" id="L32">    @OneToMany(mappedBy = &quot;sondage&quot;, cascade = CascadeType.ALL)</span>
+<span class="fc" id="L32">    @OneToMany(mappedBy = &quot;sondage&quot;, cascade = CascadeType.ALL)</span>
     private List&lt;Commentaire&gt; commentaires = new ArrayList&lt;&gt;();
 
-<span class="pc" id="L35">    @OneToMany(mappedBy = &quot;sondage&quot;, cascade = CascadeType.ALL)</span>
+<span class="fc" id="L35">    @OneToMany(mappedBy = &quot;sondage&quot;, cascade = CascadeType.ALL)</span>
     private List&lt;DateSondage&gt; dateSondage = new ArrayList&lt;&gt;();
 
-<span class="pc" id="L38">    @ManyToOne(fetch = FetchType.LAZY)</span>
+<span class="fc" id="L38">    @ManyToOne(fetch = FetchType.LAZY)</span>
     @JoinColumn(name = &quot;participant_id&quot;)
     private Participant createBy = new Participant();
 
 <span class="fc" id="L42">    public Sondage() {}</span>
 
-<span class="nc" id="L44">    public Sondage(Long sondageId, String nom, String description, Date fin, Boolean cloture, List&lt;Commentaire&gt; commentaires, List&lt;DateSondage&gt; dateSondage, Participant createBy) {</span>
-<span class="nc" id="L45">        this.sondageId = sondageId;</span>
-<span class="nc" id="L46">        this.nom = nom;</span>
-<span class="nc" id="L47">        this.description = description;</span>
-<span class="nc" id="L48">        this.fin = fin;</span>
-<span class="nc" id="L49">        this.cloture = cloture;</span>
-<span class="nc" id="L50">        this.commentaires = commentaires;</span>
-<span class="nc" id="L51">        this.dateSondage = dateSondage;</span>
-<span class="nc" id="L52">        this.createBy = createBy;</span>
-<span class="nc" id="L53">    }</span>
+<span class="fc" id="L44">    public Sondage(Long sondageId, String nom, String description, Date fin, Boolean cloture, List&lt;Commentaire&gt; commentaires, List&lt;DateSondage&gt; dateSondage, Participant createBy) {</span>
+<span class="fc" id="L45">        this.sondageId = sondageId;</span>
+<span class="fc" id="L46">        this.nom = nom;</span>
+<span class="fc" id="L47">        this.description = description;</span>
+<span class="fc" id="L48">        this.fin = fin;</span>
+<span class="fc" id="L49">        this.cloture = cloture;</span>
+<span class="fc" id="L50">        this.commentaires = commentaires;</span>
+<span class="fc" id="L51">        this.dateSondage = dateSondage;</span>
+<span class="fc" id="L52">        this.createBy = createBy;</span>
+<span class="fc" id="L53">    }</span>
 
     public Long getSondageId() {
 <span class="fc" id="L56">        return sondageId;</span>
@@ -69,12 +69,12 @@ public class Sondage {
 <span class="fc" id="L69">    }</span>
 
     public String getDescription() {
-<span class="nc" id="L72">        return description;</span>
+<span class="fc" id="L72">        return description;</span>
     }
 
     public void setDescription(String description) {
-<span class="nc" id="L76">        this.description = description;</span>
-<span class="nc" id="L77">    }</span>
+<span class="fc" id="L76">        this.description = description;</span>
+<span class="fc" id="L77">    }</span>
 
     public Date getFin() {
 <span class="nc" id="L80">        return fin;</span>
@@ -93,23 +93,23 @@ public class Sondage {
 <span class="fc" id="L93">    }</span>
 
     public List&lt;Commentaire&gt; getCommentaires() {
-<span class="nc" id="L96">        return commentaires;</span>
+<span class="fc" id="L96">        return commentaires;</span>
     }
 
     public void setCommentaires(List&lt;Commentaire&gt; commentaires) {
-<span class="nc" id="L100">        this.commentaires = commentaires;</span>
-<span class="nc" id="L101">    }</span>
+<span class="fc" id="L100">        this.commentaires = commentaires;</span>
+<span class="fc" id="L101">    }</span>
 
     public List&lt;DateSondage&gt; getDateSondage() {
-<span class="nc" id="L104">        return dateSondage;</span>
+<span class="fc" id="L104">        return dateSondage;</span>
     }
 
     public void setDateSondage(List&lt;DateSondage&gt; dateSondage) {
-<span class="nc" id="L108">        this.dateSondage = dateSondage;</span>
-<span class="nc" id="L109">    }</span>
+<span class="fc" id="L108">        this.dateSondage = dateSondage;</span>
+<span class="fc" id="L109">    }</span>
 
     public Participant getCreateBy() {
-<span class="nc" id="L112">        return createBy;</span>
+<span class="fc" id="L112">        return createBy;</span>
     }
 
     public void setCreateBy(Participant createBy) {

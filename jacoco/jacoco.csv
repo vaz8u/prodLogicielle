@@ -6,7 +6,7 @@ MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos,ParticipantDto,73,13,7,3,1
 MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos,DateSondageDto,43,17,5,3,7,5,7,4,4,3
 MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey,MySurveyApplication,8,0,0,0,3,0,2,0,2,0
 MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models,Commentaire,6,35,0,0,2,13,2,7,2,7
-MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models,Sondage,73,43,0,0,23,15,10,8,10,8
+MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models,Sondage,7,109,0,0,3,35,2,16,2,16
 MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models,DateSondage,39,27,0,0,12,9,5,5,5,5
 MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models,Participant,0,182,5,11,0,33,5,20,0,17
 MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models,DateSondee,47,21,0,0,14,7,7,3,7,3
