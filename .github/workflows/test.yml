@@ -30,3 +30,6 @@ jobs:
 
       - name: Build and test
         run: mvn -B verify
+
+      - name: Run Pitest
+        run: mvn org.pitest:pitest-maven:mutationCoverage
