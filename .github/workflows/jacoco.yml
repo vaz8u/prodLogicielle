@@ -42,8 +42,8 @@ jobs:
       - name: Generate JaCoCo Badge
         uses: cicirello/jacoco-badge-generator@v2
         with:
-          jacoco-csv-file: target/coverage/jacoco/jacoco.csv
-          badges-directory: target/coverage/jacoco
+          jacoco-csv-file: target/site/jacoco/jacoco.csv
+          badges-directory: target/site/jacoco
 
       - name: Log coverage percentage
         run: |
@@ -53,7 +53,7 @@ jobs:
       - name: Publish coverage report to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: target/coverage
+          folder: target/site
 
       - name: Upload Jacoco coverage report
         uses: actions/upload-artifact@v4
