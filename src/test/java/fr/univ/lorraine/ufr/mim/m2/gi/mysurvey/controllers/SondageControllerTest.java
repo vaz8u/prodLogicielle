@@ -21,6 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDto;
@@ -246,5 +247,15 @@ class SondageControllerTest {
         verify(mapper, times(1)).map(sondageDto, Sondage.class);
         verify(mapper, times(1)).map(expectedModel, SondageDto.class);
         verify(sondageService, times(1)).update(sondageId, expectedModel);
+    }
+
+    @Test
+    @DisplayName("Test delete Sondage")
+    void testDelete() {
+        Long sondageId = 1L;
+        sondageController.delete(sondageId);
+
+        assertEquals(1, sondageId, "Sondage should be deleted");
+        verify(sondageService, times(1)).delete(sondageId);
     }
 }
