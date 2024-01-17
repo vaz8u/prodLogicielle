@@ -21,8 +21,6 @@ class ParticipantTestEndToEnd{
 
     private static final String API_BASE_PATH = "/api/participant/";
 
-
-
     @BeforeEach
     void setup(){
         RestAssured.baseURI = "http://localhost";
@@ -56,7 +54,6 @@ class ParticipantTestEndToEnd{
 
 
         ParticipantDto participantDto = new ParticipantDto();
-        participantDto.setParticipantId(1L);
         participantDto.setNom("Man");
         participantDto.setPrenom("Sam");
 
