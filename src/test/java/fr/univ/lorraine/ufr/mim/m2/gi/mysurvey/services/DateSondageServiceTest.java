@@ -1,6 +1,7 @@
 package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services;
 
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.DateSondage;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.DateSondee;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Sondage;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.repositories.DateSondageRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,6 +76,30 @@ class DateSondageServiceTest {
     }
 
     @Test
+    @DisplayName("Test create DateSondage with parameters")
+    void testCreateWithParameters() {
+        Long sondageId = 1L;
+        Long dateSondageId= 2L;
+        Date date= new Date();
+        Sondage sondage= new Sondage();
+        List< DateSondee > dateSondee = Collections.singletonList(new DateSondee());
+        DateSondage dateSondageToCreate = new DateSondage(dateSondageId, date, sondage, dateSondee);
+
+        DateSondage expectedDateSondage = new DateSondage();
+        expectedDateSondage.setDateSondageId(dateSondageId);
+        expectedDateSondage.setDate(date);
+        expectedDateSondage.setSondage(sondage);
+        expectedDateSondage.setDateSondee(dateSondee);
+
+        when(sondageService.getById(sondageId)).thenReturn(new Sondage());
+        when(repository.save(any(DateSondage.class))).thenReturn(expectedDateSondage);
+
+        DateSondage result = dateSondageService.create(sondageId, dateSondageToCreate);
+
+        assertDto(expectedDateSondage, result);
+    }
+
+    @Test
     @DisplayName("Test delete DateSondage")
     void testDelete() {
         Long dateSondageId = 1L;
@@ -88,6 +114,34 @@ class DateSondageServiceTest {
 
         verify(repository, times(1)).findById(dateSondageId);
         verify(repository, times(1)).deleteById(dateSondageId);
+    }
+
+    @Test
+    @DisplayName("Test getDate")
+    void testGetDate(){
+        Long dateSondageId = 1L;
+        DateSondage existingDateSondage = new DateSondage();
+        existingDateSondage.setDateSondageId(dateSondageId);
+        Date date = new Date();
+        existingDateSondage.setDate(date);
+
+        Date result = existingDateSondage.getDate();
+
+        assertEquals(date, result, "DateSondage should be deleted");
+    }
+
+    @Test
+    @DisplayName("Test getDateSondee")
+    void testGetDateSondee(){
+        Long dateSondageId = 1L;
+        DateSondage existingDateSondage = new DateSondage();
+        existingDateSondage.setDateSondageId(dateSondageId);
+        List< DateSondee > dateSondee = Collections.singletonList(new DateSondee());
+        existingDateSondage.setDateSondee(dateSondee);
+
+        List< DateSondee > result = existingDateSondage.getDateSondee();
+
+        assertEquals(dateSondee, result, "DateSondage should be deleted");
     }
 
     @Test

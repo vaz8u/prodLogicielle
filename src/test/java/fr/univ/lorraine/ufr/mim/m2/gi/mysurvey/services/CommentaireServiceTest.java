@@ -142,4 +142,52 @@ class CommentaireServiceTest {
         verify(repository, times(1)).findById(commentaireId);
         verify(repository, never()).deleteById(commentaireId);
     }
+
+    @Test
+    @DisplayName("Test set/getParticipant method")
+    void testGetPartipant() {
+        Long sondageId = 2L;
+        Sondage sampleSondage = new Sondage();
+        sampleSondage.setSondageId(sondageId);
+
+        Long commentaireId = 1L;
+        Commentaire sampleCommentaire = new Commentaire();
+        sampleCommentaire.setCommentaireId(commentaireId);
+        sampleCommentaire.setSondage(sampleSondage);
+
+        Participant sampleParticipant = new Participant();
+        sampleCommentaire.setParticipant(sampleParticipant);
+
+        sampleSondage.setCommentaires(Collections.singletonList(sampleCommentaire));
+
+        when(repository.getAllBySondage(sondageId)).thenReturn(Collections.singletonList(sampleCommentaire));
+
+        Participant setResult = commentaireService.getBySondageId(sondageId).get(0).getParticipant();
+
+        Participant getResult = sampleCommentaire.getParticipant();
+
+        assertEquals(sampleParticipant, setResult, "Returned Participant should match the mocked one");
+        assertEquals(sampleParticipant, getResult, "Returned Participant should match the mocked one");
+    }
+
+    @Test
+    @DisplayName("Test set/getSondage method")
+    void testGetSondage() {
+        Long commentaireId = 1L;
+        Commentaire sampleCommentaire = new Commentaire();
+        sampleCommentaire.setCommentaireId(commentaireId);
+
+        Long sondageId = 2L;
+        Sondage sampleSondage = new Sondage();
+        sampleSondage.setSondageId(sondageId);
+        sampleCommentaire.setSondage(sampleSondage);
+
+        when(repository.getAllBySondage(sondageId)).thenReturn(Collections.singletonList(sampleCommentaire));
+
+        Sondage setResult = commentaireService.getBySondageId(sondageId).get(0).getSondage();
+        Sondage getResult = sampleCommentaire.getSondage();
+
+        assertEquals(sampleSondage, setResult, "Returned Sondage should match the mocked one");
+        assertEquals(sampleSondage, getResult, "Returned Sondage should match the mocked one");
+    }
 }
