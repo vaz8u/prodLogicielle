@@ -251,11 +251,11 @@ class ParticipantServiceTest {
         participant2.setCommentaire(List.of(commentaire));
         participant2.setSondages(List.of(sondage));
         participant2.setDateSondee(List.of(dateSondee));
-
         assertEquals(participant, participant2, "Participants should be equal");
         assertNotEquals(participant, null, "Participant should not be equal to null");
         assertNotEquals(participant, new Object(), "Participant should not be equal to new Object()");
 
+        // Test different participantId
         Participant participant3 = new Participant();
         participant3.setParticipantId(2L); // Different ID
         participant3.setPrenom("John");
@@ -263,10 +263,58 @@ class ParticipantServiceTest {
         participant3.setCommentaire(List.of(commentaire));
         participant3.setSondages(List.of(sondage));
         participant3.setDateSondee(List.of(dateSondee));
-
         assertNotEquals(participant, participant3, "Participants with different IDs should not be equal");
-    }
 
+        // Test different prenom
+        Participant participant4 = new Participant();
+        participant4.setParticipantId(1L);
+        participant4.setPrenom("Jane"); // Different prenom
+        participant4.setNom("Smith");
+        participant4.setCommentaire(List.of(commentaire));
+        participant4.setSondages(List.of(sondage));
+        participant4.setDateSondee(List.of(dateSondee));
+        assertNotEquals(participant, participant4, "Participants with different prenom should not be equal");
+
+        // Test different nom
+        Participant participant5 = new Participant();
+        participant5.setParticipantId(1L);
+        participant5.setPrenom("John");
+        participant5.setNom("Doe"); // Different nom
+        participant5.setCommentaire(List.of(commentaire));
+        participant5.setSondages(List.of(sondage));
+        participant5.setDateSondee(List.of(dateSondee));
+        assertNotEquals(participant, participant5, "Participants with different nom should not be equal");
+
+        // Test different commentaire
+        Participant participant6 = new Participant();
+        participant6.setParticipantId(1L);
+        participant6.setPrenom("John");
+        participant6.setNom("Smith");
+        participant6.setCommentaire(List.of()); // Different commentaire
+        participant6.setSondages(List.of(sondage));
+        participant6.setDateSondee(List.of(dateSondee));
+        assertNotEquals(participant, participant6, "Participants with different commentaire should not be equal");
+
+        // Test different sondage
+        Participant participant7 = new Participant();
+        participant7.setParticipantId(1L);
+        participant7.setPrenom("John");
+        participant7.setNom("Smith");
+        participant7.setCommentaire(List.of(commentaire));
+        participant7.setSondages(List.of()); // Different sondage
+        participant7.setDateSondee(List.of(dateSondee));
+        assertNotEquals(participant, participant7, "Participants with different sondage should not be equal");
+
+        // Test different dateSondee
+        Participant participant8 = new Participant();
+        participant8.setParticipantId(1L);
+        participant8.setPrenom("John");
+        participant8.setNom("Smith");
+        participant8.setCommentaire(List.of(commentaire));
+        participant8.setSondages(List.of(sondage));
+        participant8.setDateSondee(List.of()); // Different dateSondee
+        assertNotEquals(participant, participant8, "Participants with different dateSondee should not be equal");
+    }
 
     @Test
     @DisplayName("Test hashCode method")
