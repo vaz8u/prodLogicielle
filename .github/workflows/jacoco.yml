@@ -50,6 +50,9 @@ jobs:
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branches = ${{ steps.jacoco.outputs.branches }}"
 
+      - name: Create badges directory
+        run: mkdir -p .github/badges
+
       - name: Commit and push
         if: ${{ github.event_name != 'pull_request' }}
         run: |
