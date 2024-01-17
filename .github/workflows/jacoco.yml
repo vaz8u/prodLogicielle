@@ -40,7 +40,7 @@ jobs:
           path: target/site/jacoco
 
       - name: Create badges directory
-        run: mkdir -p .github/badges
+        run: mkdir -p $GITHUB_WORKSPACE/.github/badges
 
       - name: Generate Jacoco Badge
         id: jacoco
