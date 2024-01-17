@@ -11,7 +11,7 @@ public class CommentaireDto {
 <span class="fc" id="L11">    public CommentaireDto() {}</span>
 
     public Long getCommentaireId() {
-<span class="nc" id="L14">        return commentaireId;</span>
+<span class="fc" id="L14">        return commentaireId;</span>
     }
 
     public void setCommentaireId(Long commentaireId) {
@@ -37,9 +37,9 @@ public class CommentaireDto {
     @Override
     public boolean equals(Object o) {
 <span class="fc bfc" id="L39" title="All 2 branches covered.">        if (this == o) return true;</span>
-<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        if (!(o instanceof CommentaireDto)) return false;</span>
-<span class="nc" id="L41">        CommentaireDto that = (CommentaireDto) o;</span>
-<span class="nc bnc" id="L42" title="All 6 branches missed.">        return Objects.equals(getCommentaireId(), that.getCommentaireId()) &amp;&amp; Objects.equals(getCommentaire(), that.getCommentaire()) &amp;&amp; Objects.equals(getParticipant(), that.getParticipant());</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (!(o instanceof CommentaireDto)) return false;</span>
+<span class="fc" id="L41">        CommentaireDto that = (CommentaireDto) o;</span>
+<span class="fc bfc" id="L42" title="All 6 branches covered.">        return Objects.equals(getCommentaireId(), that.getCommentaireId()) &amp;&amp; Objects.equals(getCommentaire(), that.getCommentaire()) &amp;&amp; Objects.equals(getParticipant(), that.getParticipant());</span>
     }
 
     @Override
