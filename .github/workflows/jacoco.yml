@@ -30,6 +30,7 @@ jobs:
           path: target/site/jacoco
 
   generate-badge:
+    runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Download Jacoco report
@@ -55,7 +56,7 @@ jobs:
       - name: Commit and push
         if: ${{ github.event_name != 'pull_request' }}
         run: |
-          cd .github/badges
+          cd $GITHUB_WORKSPACE/.github/badges
           if [[ `git status --porcelain *.svg` ]]; then
             git config --global user.name 'github-actions'
             git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
