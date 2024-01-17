@@ -39,6 +39,9 @@ jobs:
           name: jacoco-report
           path: target/site/jacoco
 
+      - name: Create badges directory
+        run: mkdir -p .github/badges
+
       - name: Generate Jacoco Badge
         id: jacoco
         uses: cicirello/jacoco-badge-generator@v2
@@ -49,9 +52,6 @@ jobs:
         run: |
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branches = ${{ steps.jacoco.outputs.branches }}"
-
-      - name: Create badges directory
-        run: mkdir -p .github/badges
 
       - name: Commit and push
         if: ${{ github.event_name != 'pull_request' }}
