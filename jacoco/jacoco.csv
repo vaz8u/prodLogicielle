@@ -1,12 +1,11 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos,SondageDto,0,132,1,15,0,24,1,22,0,15
-MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos,CommentaireDto,19,59,0,10,1,14,1,13,1,8
+MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos,SondageDto,0,132,0,16,0,24,0,23,0,15
+MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos,CommentaireDto,0,78,0,10,0,15,0,14,0,9
 MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos,DateSondeeDto,0,78,0,10,0,15,0,14,0,9
 MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos,ParticipantDto,0,86,0,10,0,16,0,15,0,10
 MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos,DateSondageDto,0,60,0,8,0,12,0,11,0,7
-MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey,MySurveyApplication,8,0,0,0,3,0,2,0,2,0
 MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models,Commentaire,0,41,0,0,0,15,0,9,0,9
-MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models,Sondage,7,109,0,0,3,35,2,16,2,16
+MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models,Sondage,0,116,0,0,0,38,0,18,0,18
 MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models,DateSondage,0,66,0,0,0,21,0,10,0,10
 MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models,Participant,0,182,0,16,0,33,0,25,0,17
 MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models,DateSondee,0,68,0,0,0,21,0,10,0,10
@@ -18,7 +17,5 @@ MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services,ParticipantService,0,5
 MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services,DateSondageService,0,46,0,2,0,12,0,6,0,5
 MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.controllers,DateSondageController,0,40,0,0,0,10,0,3,0,3
 MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.controllers,CommentaireController,0,35,0,0,0,9,0,3,0,3
-MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.controllers,SondageController,10,181,0,0,2,35,2,13,2,13
+MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.controllers,SondageController,0,191,0,0,0,37,0,15,0,15
 MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.controllers,ParticipantController,0,86,0,0,0,16,0,7,0,7
-MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.configurations,SwaggerConfig,29,0,0,0,12,0,3,0,3,0
-MySurvey,fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.configurations,ModelMapperConfig,155,0,0,0,26,0,16,0,16,0
