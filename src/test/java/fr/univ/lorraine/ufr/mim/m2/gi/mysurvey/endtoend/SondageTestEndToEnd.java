@@ -5,7 +5,6 @@ import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.DateSondageDto;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.ParticipantDto;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.SondageDto;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Sondage;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -34,6 +33,7 @@ public class SondageTestEndToEnd {
     void participantTestEndToEnd() {
         Response res;
 
+        //Création dun participant
         ParticipantDto participantDto = new ParticipantDto();
         participantDto.setParticipantId(1L);
         participantDto.setNom("Man");
@@ -50,7 +50,9 @@ public class SondageTestEndToEnd {
         Participant createdParticipant = res.as(Participant.class);
         Long participantId = createdParticipant.getParticipantId();
 
-
+        //Récuperation de tous les sondages
+        //Test si la liste de sondages est vide
+        //Test si la liste de sondages n'est pas vide
         res = given()
                     .contentType(ContentType.JSON)
                     .when()
@@ -73,7 +75,8 @@ public class SondageTestEndToEnd {
             assertNotNull(firstSondage.getFin());
         }
 
-
+        //Création d'un sondage
+        //Test si les données crée du sondage son bon
         SondageDto sondageDto = new SondageDto();
         sondageDto.setCreateBy(participantId);
         sondageDto.setNom("Sondage Test");
@@ -98,6 +101,8 @@ public class SondageTestEndToEnd {
         assertEquals(createdSondage.getDescription(), sondageDto.getDescription());
 
 
+        //Récuperation du sondage crée
+        //Test si les données récuperé du sondage son bon
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -134,7 +139,8 @@ public class SondageTestEndToEnd {
 //        assertEquals(createdSondage.getFin(), sondageDto.getFin());
 //        assertEquals(createdSondage.getDescription(), sondageDto.getDescription());
 
-
+        //Récupération des meilleurs dates d'un sondage
+        //Test si la liste de date est vide
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -148,6 +154,8 @@ public class SondageTestEndToEnd {
         assertEquals(res.asString(), "[]");
 
 
+        //Récupération de tous les commentaires d'un sondage
+        //Test si la liste des commentaires est vide
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -160,7 +168,8 @@ public class SondageTestEndToEnd {
         assertEquals(commentaires.size(), 0);
         assertEquals(res.asString(), "[]");
 
-
+        //Récupération de toutes les dates d'un sondage
+        //Test si la liste de date est vide
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -173,7 +182,8 @@ public class SondageTestEndToEnd {
         assertEquals(dates.size(), 0);
         assertEquals(res.asString(), "[]");
 
-
+        //Récupération des éventuelles meilleures dates d'un sondage
+        //Test si la liste des éventuelles meilleures dates est vide
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -187,7 +197,8 @@ public class SondageTestEndToEnd {
         assertEquals(res.asString(), "[]");
 
 
-
+        //Création d'un commentaire dans le sondage
+        //Test si les données crée du commetaire son bon
         CommentaireDto commentaireDto = new CommentaireDto();
         commentaireDto.setParticipant(participantId);
         commentaireDto.setCommentaire("Commentaire Test");
@@ -206,7 +217,9 @@ public class SondageTestEndToEnd {
         assertEquals(createdCommentaire.getParticipant(), commentaireDto.getParticipant());
         assertEquals(createdCommentaire.getCommentaire(), commentaireDto.getCommentaire());
 
-
+        //Récupération de tous les commentaires d'un sondage
+        //Test si la liste des commentaires n'est pas vide
+        //Test si le 1er commentaire de la liste est bien le commentaire crée
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -224,6 +237,8 @@ public class SondageTestEndToEnd {
         }
 
 
+        //Création d'un date de sondage (1)
+        //Test si les données crée de la date de sondage son bon
         DateSondageDto dateSondage1Dto = new DateSondageDto();
         dateSondage1Dto.setDate(new Date());
         res = given()
@@ -240,6 +255,8 @@ public class SondageTestEndToEnd {
         assertEquals(createdDateSondage1.getDateSondageId(), dateSondage1Id);
         assertEquals(createdDateSondage1.getDate(), dateSondage1Dto.getDate());
 
+        //Création d'un date de sondage (2)
+        //Test si les données crée de la date de sondage son bon
         DateSondageDto dateSondage2Dto = new DateSondageDto();
         dateSondage2Dto.setDate(new Date());
         res = given()
@@ -256,7 +273,9 @@ public class SondageTestEndToEnd {
         assertEquals(createdDateSondage2.getDateSondageId(), dateSondage2Id);
         assertEquals(createdDateSondage2.getDate(), dateSondage2Dto.getDate());
 
-
+        //Récupération de toutes les dates d'un sondage
+        //Test si la liste de date n'est pas vide
+        //Test si la 1ere date de la liste est la date sondage 1 crée
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -276,6 +295,7 @@ public class SondageTestEndToEnd {
         //TODO dates maybe
         //TODO dates best
 
+        //Suppression du commentaire
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -285,6 +305,7 @@ public class SondageTestEndToEnd {
                 .extract()
                 .response();
 
+        //Suppression de la date sondage 1
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -294,6 +315,7 @@ public class SondageTestEndToEnd {
                 .extract()
                 .response();
 
+        //Suppression de la date sondage 2
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -303,6 +325,7 @@ public class SondageTestEndToEnd {
                 .extract()
                 .response();
 
+        //Suppression du participant
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -312,6 +335,7 @@ public class SondageTestEndToEnd {
                 .extract()
                 .response();
 
+        //Suppression du sondage
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -321,6 +345,7 @@ public class SondageTestEndToEnd {
                 .extract()
                 .response();
 
+        //Récuperation du sondage qui n'existe pas
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -330,5 +355,4 @@ public class SondageTestEndToEnd {
                 .extract()
                 .response();
     }
-
 }

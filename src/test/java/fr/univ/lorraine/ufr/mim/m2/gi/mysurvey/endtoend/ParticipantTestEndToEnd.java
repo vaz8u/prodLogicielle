@@ -30,8 +30,11 @@ class ParticipantTestEndToEnd{
     @Test
     void participantTestEndToEnd(){
         Response res;
-        res =
-            given()
+
+        //Récuperation des participants
+        //Test si la liste de participants est vide
+        //Test si la liste de participants n'est pas vide
+        res = given()
                     .contentType(ContentType.JSON)
                     .when()
                     .get(API_BASE_PATH)
@@ -39,7 +42,6 @@ class ParticipantTestEndToEnd{
                     .statusCode(200)
                     .extract()
                     .response();
-
         List<Participant> participants = res.jsonPath().getList(".", Participant.class);
         if (participants.isEmpty()) {
             assertEquals(participants.size(), 0);
@@ -53,10 +55,11 @@ class ParticipantTestEndToEnd{
         }
 
 
+        //Création d'un participant
+        //Test si les données crée du participant son bon
         ParticipantDto participantDto = new ParticipantDto();
         participantDto.setNom("Man");
         participantDto.setPrenom("Sam");
-
         res = given()
                     .contentType(ContentType.JSON)
                     .body(participantDto)
@@ -66,13 +69,14 @@ class ParticipantTestEndToEnd{
                     .statusCode(201)
                     .extract()
                     .response();
-
         Participant createdParticipant = res.as(Participant.class);
         Long participantId = createdParticipant.getParticipantId();
         assertEquals(createdParticipant.getNom(), participantDto.getNom());
         assertEquals(createdParticipant.getPrenom(), participantDto.getPrenom());
 
 
+        //Récuperation du participant crée
+        //Test si les données récuperé son bon
         res = given()
                     .contentType(ContentType.JSON)
                     .when()
@@ -81,13 +85,14 @@ class ParticipantTestEndToEnd{
                     .statusCode(200)
                     .extract()
                     .response();
-
         createdParticipant = res.as(Participant.class);
         assertEquals(createdParticipant.getParticipantId(), participantId);
         assertEquals(createdParticipant.getNom(), participantDto.getNom());
         assertEquals(createdParticipant.getPrenom(), participantDto.getPrenom());
 
 
+        //Modification du participant
+        //Test si les données modifié son bon
         participantDto.setNom("Pierre");
         participantDto.setPrenom("Caillou");
         res = given()
@@ -99,13 +104,14 @@ class ParticipantTestEndToEnd{
                     .statusCode(200)
                     .extract()
                     .response();
-
         createdParticipant = res.as(Participant.class);
         assertEquals(createdParticipant.getParticipantId(), participantId);
         assertEquals(createdParticipant.getNom(), participantDto.getNom());
         assertEquals(createdParticipant.getPrenom(), participantDto.getPrenom());
 
 
+        //Récuperation du participant modifié
+        //Test si les données récuperé son bon
         res = given()
                     .contentType(ContentType.JSON)
                     .when()
@@ -114,13 +120,14 @@ class ParticipantTestEndToEnd{
                     .statusCode(200)
                     .extract()
                     .response();
-
         createdParticipant = res.as(Participant.class);
         assertEquals(createdParticipant.getParticipantId(), participantId);
         assertEquals(createdParticipant.getNom(), participantDto.getNom());
         assertEquals(createdParticipant.getPrenom(), participantDto.getPrenom());
 
 
+        //Modification du participant avec un nom null
+        //Test si une erreur 500 a été lancé
         participantDto.setNom(null);
         res = given()
                 .contentType(ContentType.JSON)
@@ -133,6 +140,7 @@ class ParticipantTestEndToEnd{
                 .response();
 
 
+        //Suppression du participant
         res = given()
                     .contentType(ContentType.JSON)
                     .when()
@@ -142,7 +150,7 @@ class ParticipantTestEndToEnd{
                     .extract()
                     .response();
 
-
+        //Récuperation d'un participant qui n'existe pas
         res = given()
                     .contentType(ContentType.JSON)
                     .when()
@@ -152,7 +160,7 @@ class ParticipantTestEndToEnd{
                     .extract()
                     .response();
 
-
+        //Suppression d'un participant qui n'existe pas
         res = given()
                     .contentType(ContentType.JSON)
                     .when()
@@ -162,7 +170,7 @@ class ParticipantTestEndToEnd{
                     .extract()
                     .response();
 
-
+        //Modification d'un participant qui n'existe pas
         res = given()
                 .contentType(ContentType.JSON)
                 .body(participantDto)
@@ -173,7 +181,7 @@ class ParticipantTestEndToEnd{
                 .extract()
                 .response();
 
-
+        //Création d'un participant avec un prénom null
         participantDto.setPrenom(null);
         res = given()
                 .contentType(ContentType.JSON)

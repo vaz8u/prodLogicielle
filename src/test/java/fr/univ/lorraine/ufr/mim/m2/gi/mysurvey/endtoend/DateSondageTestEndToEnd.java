@@ -30,6 +30,7 @@ public class DateSondageTestEndToEnd {
     void dateSondageTestEndToEnd(){
         Response res;
 
+        //Création d'un participant
         ParticipantDto participantDto = new ParticipantDto();
         participantDto.setParticipantId(1L);
         participantDto.setNom("Man");
@@ -46,7 +47,7 @@ public class DateSondageTestEndToEnd {
         Participant createdParticipant = res.as(Participant.class);
         Long participantId = createdParticipant.getParticipantId();
 
-
+        //Création d'un sondage
         SondageDto sondageDto = new SondageDto();
         sondageDto.setCreateBy(participantId);
         sondageDto.setNom("Sondage Test");
@@ -65,7 +66,7 @@ public class DateSondageTestEndToEnd {
         SondageDto createdSondage = res.as(SondageDto.class);
         Long sondageId = createdSondage.getSondageId();
 
-
+        //Création d'une date de sondage
         DateSondageDto dateSondageDto = new DateSondageDto();
         dateSondageDto.setDate(new Date());
         res = given()
@@ -81,6 +82,8 @@ public class DateSondageTestEndToEnd {
         Long dateSondageId = createdDateSondage.getDateSondageId();
 
 
+        //Création d'une date sondée
+        //Test de la date sondée
         DateSondeeDto dateSondeeDto = new DateSondeeDto();
         dateSondeeDto.setParticipant(participantId);
         dateSondeeDto.setChoix("DISPONIBLE");
@@ -100,6 +103,7 @@ public class DateSondageTestEndToEnd {
         assertEquals(createdDateSondee.getChoix(), dateSondeeDto.getChoix());
 
 
+        //Suppression de la date sondée
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -109,6 +113,7 @@ public class DateSondageTestEndToEnd {
                 .extract()
                 .response();
 
+        //Suppression du sondage
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -118,6 +123,7 @@ public class DateSondageTestEndToEnd {
                 .extract()
                 .response();
 
+        //Suppression du participant
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -127,6 +133,7 @@ public class DateSondageTestEndToEnd {
                 .extract()
                 .response();
 
+        //Suppression de la date sondée
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -135,9 +142,5 @@ public class DateSondageTestEndToEnd {
                 .statusCode(200)
                 .extract()
                 .response();
-
-
-
     }
-
 }

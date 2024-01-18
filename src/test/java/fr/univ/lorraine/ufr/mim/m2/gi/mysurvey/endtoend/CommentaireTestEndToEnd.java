@@ -2,26 +2,14 @@ package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.endtoend;
 
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.*;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.repositories.CommentaireRepository;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.CommentaireService;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-
 import java.util.Date;
-
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class CommentaireTestEndToEnd {
@@ -37,7 +25,7 @@ public class CommentaireTestEndToEnd {
     @Test
     void commentaireTestEndToEnd(){
         Response res;
-
+        //Création d'un participant
         ParticipantDto participantDto = new ParticipantDto();
         participantDto.setParticipantId(1L);
         participantDto.setNom("Man");
@@ -54,7 +42,7 @@ public class CommentaireTestEndToEnd {
         Participant createdParticipant = res.as(Participant.class);
         Long participantId = createdParticipant.getParticipantId();
 
-
+        //Création d'un sondage
         SondageDto sondageDto = new SondageDto();
         sondageDto.setCreateBy(participantId);
         sondageDto.setNom("Sondage Test");
@@ -73,7 +61,7 @@ public class CommentaireTestEndToEnd {
         SondageDto createdSondage = res.as(SondageDto.class);
         Long sondageId = createdSondage.getSondageId();
 
-
+        //Création d'un commentaire
         CommentaireDto commentaireDto = new CommentaireDto();
         commentaireDto.setParticipant(participantId);
         commentaireDto.setCommentaire("Commentaire Test");
@@ -106,6 +94,7 @@ public class CommentaireTestEndToEnd {
 //        assertEquals(createdCommentaire.getParticipant(), createdCommentaire.getParticipant());
 
 
+        //Suppression du commentaire
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -115,6 +104,7 @@ public class CommentaireTestEndToEnd {
                 .extract()
                 .response();
 
+        //Suppression du sondage
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -124,6 +114,7 @@ public class CommentaireTestEndToEnd {
                 .extract()
                 .response();
 
+        //Suppression du participant
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -133,6 +124,7 @@ public class CommentaireTestEndToEnd {
                 .extract()
                 .response();
 
+        //Suppression du commentaire
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
