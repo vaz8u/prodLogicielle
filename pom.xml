@@ -62,6 +62,14 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <excludes>
+                        <!--exclure fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.configurations-->
+                        <exclude>**/configurations/*.class</exclude>
+                        <!--exclure fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.MySurveyApplication-->
+                        <exclude>**/MySurveyApplication.class</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
             <!-- Add SonarQube Scanner Plugin -->
             <plugin>

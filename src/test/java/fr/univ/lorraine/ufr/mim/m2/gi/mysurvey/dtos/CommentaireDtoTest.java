@@ -50,4 +50,13 @@ class CommentaireDtoTest {
 
         assertNotEquals(commentaireDto, commentaireDto2);
     }
+
+    @Test
+    @DisplayName("Test hashCode method")
+    void testHashCode() {
+        CommentaireDto commentaireDto = new CommentaireDto();
+        CommentaireDto commentaireDto1 = new CommentaireDto();
+
+        assertEquals(commentaireDto.hashCode(), commentaireDto1.hashCode());
+    }
 }
