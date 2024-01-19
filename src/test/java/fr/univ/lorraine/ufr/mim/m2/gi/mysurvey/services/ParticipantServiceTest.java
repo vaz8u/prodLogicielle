@@ -33,11 +33,11 @@ class ParticipantServiceTest {
     @DisplayName("Test getById method")
     void testGetById() {
         Participant sampleParticipant = new Participant();
-        when(repository.getById(anyLong())).thenReturn(sampleParticipant);
+        when(repository.findById(anyLong())).thenReturn(Optional.of(sampleParticipant));
 
         Participant result = participantService.getById(1L);
 
-        assertDto(sampleParticipant,result);
+        assertDto(sampleParticipant, result);
     }
 
     @Test
@@ -72,7 +72,7 @@ class ParticipantServiceTest {
 
         Participant result = participantService.create(participantToCreate);
 
-        assertDto(participantToCreate,result);
+        assertDto(participantToCreate, result);
     }
 
     @Test

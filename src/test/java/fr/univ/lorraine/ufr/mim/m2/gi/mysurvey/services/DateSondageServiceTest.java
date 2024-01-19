@@ -37,7 +37,7 @@ class DateSondageServiceTest {
     void testGetById() {
         Long dateSondageId = 1L;
         DateSondage sampleDateSondage = new DateSondage();
-        when(repository.getById(dateSondageId)).thenReturn(sampleDateSondage);
+        when(repository.findById(dateSondageId)).thenReturn(Optional.of(sampleDateSondage));
 
         DateSondage result = dateSondageService.getById(dateSondageId);
 

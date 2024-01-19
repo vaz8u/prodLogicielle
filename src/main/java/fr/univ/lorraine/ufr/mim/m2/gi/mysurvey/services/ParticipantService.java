@@ -15,7 +15,7 @@ public class ParticipantService {
     }
 
     public Participant getById(Long id) {
-        return repository.getById(id);
+        return repository.findById(id).orElse(null);
     }
 
     public List<Participant> getAll() {
