@@ -8,7 +8,8 @@ public class DateSondageDto {
     private Long dateSondageId;
     private Date date;
 
-    public DateSondageDto() {}
+    public DateSondageDto() {
+    }
 
     public Long getDateSondageId() {
         return dateSondageId;

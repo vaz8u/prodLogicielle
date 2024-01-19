@@ -25,7 +25,8 @@ public class Commentaire {
     @JoinColumn(name = "participant_id")
     private Participant participant = new Participant();
 
-    public Commentaire() {}
+    public Commentaire() {
+    }
 
     public Long getCommentaireId() {
         return commentaireId;
@@ -58,4 +59,5 @@ public class Commentaire {
     public void setParticipant(Participant participant) {
         this.participant = participant;
     }
+
 }

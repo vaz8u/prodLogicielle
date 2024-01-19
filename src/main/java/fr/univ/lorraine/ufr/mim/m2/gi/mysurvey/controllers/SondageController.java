@@ -10,6 +10,8 @@ import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.CommentaireService;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.DateSondageService;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.DateSondeeService;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.SondageService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/sondage")
+@Api(tags = "API Sondage")
 public class SondageController {
 
     private final SondageService service;
@@ -39,6 +42,7 @@ public class SondageController {
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
+    @ApiOperation(value = "Récupérer un sondage")
     public SondageDto get(@PathVariable("id") Long id) {
         var model = service.getById(id);
         return mapper.map(model, SondageDto.class);
@@ -47,6 +51,7 @@ public class SondageController {
     @GetMapping(value = "/{id}/best")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
+    @ApiOperation(value = "Récupérer les meilleurs dates d'un sondage")
     public List<Date> getBest(@PathVariable("id") Long id) {
         return request.bestDate(id);
     }
@@ -54,6 +59,7 @@ public class SondageController {
     @GetMapping(value = "/{id}/maybe")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
+    @ApiOperation(value = "Récupérer les éventuelles meilleures dates d'un sondage")
     public List<Date> getMaybeBest(@PathVariable("id") Long id) {
         return request.maybeBestDate(id);
     }
@@ -61,6 +67,7 @@ public class SondageController {
     @GetMapping(value = "/")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
+    @ApiOperation(value = "Récupérer tous les sondages")
     public List<SondageDto> get() {
         var models = service.getAll();
 
@@ -72,6 +79,7 @@ public class SondageController {
     @GetMapping(value = "/{id}/commentaires")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
+    @ApiOperation(value = "Récupérer tous les commentaires d'un sondage")
     public List<CommentaireDto> getCommentaires(@PathVariable("id") Long id) {
         var models = scommentaire.getBySondageId(id);
         return models.stream()
@@ -82,6 +90,7 @@ public class SondageController {
     @GetMapping(value = "/{id}/dates")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
+    @ApiOperation(value = "Récupérer toutes les dates d'un sondage")
     public List<DateSondageDto> getDates(@PathVariable("id") Long id) {
         var models = sdate.getBySondageId(id);
         return models.stream()
@@ -92,6 +101,7 @@ public class SondageController {
     @PostMapping(value = "/")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
+    @ApiOperation(value = "Créer un nouveau sondage")
     public SondageDto create(@RequestBody SondageDto sondageDto) {
         var model = mapper.map(sondageDto, Sondage.class);
         var result = service.create(sondageDto.getCreateBy(), model);
@@ -101,6 +111,7 @@ public class SondageController {
     @PostMapping(value = "/{id}/commentaires")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
+    @ApiOperation(value = "Ajouter un commentaire à un sondage")
     public CommentaireDto createCommantaire(@PathVariable("id") Long id, @RequestBody CommentaireDto commantaireDto) {
         var model = mapper.map(commantaireDto, Commentaire.class);
         var result = scommentaire.addCommantaire(id, commantaireDto.getParticipant(), model);
@@ -110,6 +121,7 @@ public class SondageController {
     @PostMapping(value = "/{id}/dates")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
+    @ApiOperation(value = "Ajouter une date à un sondage")
     public DateSondageDto createDate(@PathVariable("id") Long id, @RequestBody DateSondageDto dto) {
         var model = mapper.map(dto, DateSondage.class);
         var result = sdate.create(id, model);
@@ -118,6 +130,7 @@ public class SondageController {
 
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Mettre à jour un sondage")
     public SondageDto update(@PathVariable("id") Long id, @RequestBody SondageDto sondageDto) {
         var model = mapper.map(sondageDto, Sondage.class);
         var result = service.update(id, model);
@@ -126,6 +139,7 @@ public class SondageController {
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Supprimer un sondage")
     public void delete(@PathVariable("id") Long id) {
         service.delete(id);
     }
