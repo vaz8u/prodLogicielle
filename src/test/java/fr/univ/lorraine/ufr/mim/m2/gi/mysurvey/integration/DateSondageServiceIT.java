@@ -20,7 +20,7 @@ import java.util.Date;
 
 @SpringBootTest
 @Transactional
-class DateSondageServiceIntegrationTests {
+class DateSondageServiceIT {
 
     @Autowired
     DateSondageService dateSondageService;

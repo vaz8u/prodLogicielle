@@ -14,7 +14,7 @@ import java.util.List;
 
 @SpringBootTest
 @Transactional
-class ParticipantServiceIntegrationTests {
+class ParticipantServiceIT {
 
     @Autowired
     ParticipantService participantService;

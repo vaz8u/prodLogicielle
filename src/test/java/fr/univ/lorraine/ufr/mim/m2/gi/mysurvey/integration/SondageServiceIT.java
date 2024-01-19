@@ -18,7 +18,7 @@ import java.util.List;
 
 @SpringBootTest
 @Transactional
-class SondageServiceIntegrationTests {
+class SondageServiceIT {
 
     @Autowired
     SondageService sondageService;

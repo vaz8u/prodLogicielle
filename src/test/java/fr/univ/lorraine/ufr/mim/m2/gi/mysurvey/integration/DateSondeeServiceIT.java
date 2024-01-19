@@ -19,7 +19,7 @@ import java.util.List;
 
 @SpringBootTest
 @Transactional
-class DateSondeeServiceIntegrationTests {
+class DateSondeeServiceIT {
 
     @Autowired
     DateSondeeService dateSondeeService;
