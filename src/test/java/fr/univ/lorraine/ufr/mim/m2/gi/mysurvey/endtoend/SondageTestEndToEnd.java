@@ -122,7 +122,6 @@ public class SondageTestEndToEnd {
         assertEquals(createdSondage.getFin(), sondageDto.getFin());
         assertEquals(createdSondage.getDescription(), sondageDto.getDescription());
 
-
         //Récuperation du sondage crée
         //Test si les données récuperé du sondage son bon
         res = given()
@@ -160,7 +159,6 @@ public class SondageTestEndToEnd {
         assertEquals(createdSondage.getFin(), sondageDto.getFin());
         assertEquals(createdSondage.getDescription(), sondageDto.getDescription());
 
-
         //Récupération des meilleurs dates d'un sondage
         //Test si la liste de date est vide
         res = given()
@@ -174,7 +172,6 @@ public class SondageTestEndToEnd {
         List<CommentaireDto> bestCommentaires = res.jsonPath().getList(".", CommentaireDto.class);
         assertEquals(bestCommentaires.size(), 0);
         assertEquals(res.asString(), "[]");
-
 
         //Récupération de tous les commentaires d'un sondage
         //Test si la liste des commentaires est vide
@@ -217,7 +214,6 @@ public class SondageTestEndToEnd {
         List<DateSondageDto> maybeDates = res.jsonPath().getList(".", DateSondageDto.class);
         assertEquals(maybeDates.size(), 0);
         assertEquals(res.asString(), "[]");
-
 
         //Création d'un commentaire dans le sondage
         //Test si les données crée du commetaire son bon

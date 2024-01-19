@@ -22,7 +22,6 @@ public class CommentaireTestEndToEnd {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = 8080;
     }
-
     @Test
     void commentaireTestEndToEnd(){
         Response res;
@@ -94,7 +93,6 @@ public class CommentaireTestEndToEnd {
         assertEquals(createdCommentaire.getCommentaireId(), commentaireId);
         assertEquals(createdCommentaire.getCommentaire(), createdCommentaire.getCommentaire());
         assertEquals(createdCommentaire.getParticipant(), createdCommentaire.getParticipant());
-
 
         //Suppression du commentaire
         res = given()

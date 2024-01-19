@@ -54,7 +54,6 @@ class ParticipantTestEndToEnd{
             assertNotNull(firstParticipant.getPrenom());
         }
 
-
         //Création d'un participant
         //Test si les données crée du participant son bon
         ParticipantDto participantDto = new ParticipantDto();
@@ -74,7 +73,6 @@ class ParticipantTestEndToEnd{
         assertEquals(createdParticipant.getNom(), participantDto.getNom());
         assertEquals(createdParticipant.getPrenom(), participantDto.getPrenom());
 
-
         //Récuperation du participant crée
         //Test si les données récuperé son bon
         res = given()
@@ -89,7 +87,6 @@ class ParticipantTestEndToEnd{
         assertEquals(createdParticipant.getParticipantId(), participantId);
         assertEquals(createdParticipant.getNom(), participantDto.getNom());
         assertEquals(createdParticipant.getPrenom(), participantDto.getPrenom());
-
 
         //Modification du participant
         //Test si les données modifié son bon
@@ -109,7 +106,6 @@ class ParticipantTestEndToEnd{
         assertEquals(createdParticipant.getNom(), participantDto.getNom());
         assertEquals(createdParticipant.getPrenom(), participantDto.getPrenom());
 
-
         //Récuperation du participant modifié
         //Test si les données récuperé son bon
         res = given()
@@ -125,7 +121,6 @@ class ParticipantTestEndToEnd{
         assertEquals(createdParticipant.getNom(), participantDto.getNom());
         assertEquals(createdParticipant.getPrenom(), participantDto.getPrenom());
 
-
         //Modification du participant avec un nom null
         //Test si une erreur 500 a été lancé
         participantDto.setNom(null);
@@ -138,7 +133,6 @@ class ParticipantTestEndToEnd{
                 .statusCode(500)
                 .extract()
                 .response();
-
 
         //Suppression du participant
         res = given()

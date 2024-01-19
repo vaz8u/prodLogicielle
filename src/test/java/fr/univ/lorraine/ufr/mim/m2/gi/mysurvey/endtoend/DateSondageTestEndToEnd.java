@@ -82,7 +82,6 @@ public class DateSondageTestEndToEnd {
         DateSondageDto createdDateSondage = res.as(DateSondageDto.class);
         Long dateSondageId = createdDateSondage.getDateSondageId();
 
-
         //Création d'une date sondée
         //Test de la date sondée
         DateSondeeDto dateSondeeDto = new DateSondeeDto();
@@ -102,7 +101,6 @@ public class DateSondageTestEndToEnd {
         assertEquals(createdDateSondee.getDateSondeeId(), dateSondeeId);
         assertEquals(createdDateSondee.getParticipant(), dateSondeeDto.getParticipant());
         assertEquals(createdDateSondee.getChoix(), dateSondeeDto.getChoix());
-
 
         //Suppression de la date sondée
         res = given()
