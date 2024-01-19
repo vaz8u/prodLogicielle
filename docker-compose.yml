@@ -1,11 +1,12 @@
-version: '3'
+version: "3"
 services:
-  db:
+  test:
     image: postgres:latest
+    ports:
+      - 5432:5432
     environment:
       POSTGRES_PASSWORD: admin
       POSTGRES_USER: admin
-      ports: "5432:5432"
       POSTGRES_DB: db
   web:
     image: openjdk:11-jdk

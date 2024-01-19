@@ -87,7 +87,8 @@ class SondageServiceTest {
         List<Commentaire> commentaires = null;
         List<DateSondage> dateSondage = null;
 
-        Sondage sondageToCreate = new Sondage(sondageId, nom, description, fin, cloture, commentaires, dateSondage, sampleParticipant);
+        Sondage sondageToCreate = new Sondage(sondageId, nom, description, fin, cloture, commentaires, dateSondage,
+                sampleParticipant);
         when(repository.save(any(Sondage.class))).thenReturn(sondageToCreate);
 
         Sondage result = sondageService.create(1L, sondageToCreate);
@@ -174,7 +175,7 @@ class SondageServiceTest {
         Sondage sampleSondage = new Sondage();
         sampleSondage.setSondageId(1L);
         sampleSondage.setDescription(description);
-        when(repository.getById(anyLong())).thenReturn(sampleSondage);
+        when(repository.findById(anyLong())).thenReturn(Optional.of(sampleSondage));
 
         String result = sondageService.getById(1L).getDescription();
 
@@ -189,7 +190,7 @@ class SondageServiceTest {
         Sondage sampleSondage = new Sondage();
         sampleSondage.setSondageId(1L);
         sampleSondage.setCommentaires(commentaires);
-        when(repository.getById(anyLong())).thenReturn(sampleSondage);
+        when(repository.findById(anyLong())).thenReturn(Optional.of(sampleSondage));
 
         List<Commentaire> result = sondageService.getById(1L).getCommentaires();
 
@@ -204,7 +205,7 @@ class SondageServiceTest {
         Sondage sampleSondage = new Sondage();
         sampleSondage.setSondageId(1L);
         sampleSondage.setDateSondage(dateSondage);
-        when(repository.getById(anyLong())).thenReturn(sampleSondage);
+        when(repository.findById(anyLong())).thenReturn(Optional.of(sampleSondage));
 
         List<DateSondage> result = sondageService.getById(1L).getDateSondage();
 
@@ -219,7 +220,7 @@ class SondageServiceTest {
         Sondage sampleSondage = new Sondage();
         sampleSondage.setSondageId(1L);
         sampleSondage.setCreateBy(createBy);
-        when(repository.getById(anyLong())).thenReturn(sampleSondage);
+        when(repository.findById(anyLong())).thenReturn(Optional.of(sampleSondage));
 
         Participant result = sondageService.getById(1L).getCreateBy();
 
