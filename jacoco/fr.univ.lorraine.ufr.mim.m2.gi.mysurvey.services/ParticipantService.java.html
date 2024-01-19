@@ -15,7 +15,7 @@ public class ParticipantService {
 <span class="fc" id="L15">    }</span>
 
     public Participant getById(Long id) {
-<span class="fc" id="L18">        return repository.getById(id);</span>
+<span class="fc" id="L18">        return repository.findById(id).orElse(null);</span>
     }
 
     public List&lt;Participant&gt; getAll() {

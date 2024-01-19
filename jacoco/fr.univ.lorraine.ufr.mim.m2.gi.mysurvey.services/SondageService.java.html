@@ -18,7 +18,7 @@ public class SondageService {
 <span class="fc" id="L18">    }</span>
 
     public Sondage getById(Long id) {
-<span class="fc" id="L21">        return repository.getById(id);</span>
+<span class="fc" id="L21">        return repository.findById(id).orElse(null);</span>
     }
 
     public List&lt;Sondage&gt; getAll() {
