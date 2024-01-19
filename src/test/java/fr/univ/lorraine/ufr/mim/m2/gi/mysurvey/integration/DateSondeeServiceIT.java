@@ -24,8 +24,7 @@ import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.DateSondee;
 
 @SpringBootTest
 @Transactional
-class DateSondeeServiceIntegrationTests {
-
+public class DateSondeeServiceIT {
     @Autowired
     DateSondeeService dateSondeeService;
 

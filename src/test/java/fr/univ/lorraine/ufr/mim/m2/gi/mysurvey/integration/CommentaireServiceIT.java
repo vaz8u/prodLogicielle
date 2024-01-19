@@ -19,8 +19,7 @@ import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.SondageService;
 
 @SpringBootTest
 @Transactional
-class CommentaireServiceIntegrationTest {
-
+public class CommentaireServiceIT {
     @Autowired
     CommentaireService commentaireService;
 
@@ -160,5 +159,4 @@ class CommentaireServiceIntegrationTest {
             this.commentaireService.delete(null);
         });
     }
-
 }

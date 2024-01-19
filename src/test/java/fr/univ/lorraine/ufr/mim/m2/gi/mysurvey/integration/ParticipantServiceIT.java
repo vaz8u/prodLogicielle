@@ -15,8 +15,7 @@ import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
 
 @SpringBootTest
 @Transactional
-class ParticipantServiceIntegrationTests {
-
+public class ParticipantServiceIT {
     @Autowired
     ParticipantService participantService;
 

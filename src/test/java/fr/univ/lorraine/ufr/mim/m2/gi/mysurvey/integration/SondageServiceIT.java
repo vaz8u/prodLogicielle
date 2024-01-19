@@ -19,8 +19,7 @@ import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Sondage;
 
 @SpringBootTest
 @Transactional
-class SondageServiceIntegrationTests {
-
+public class SondageServiceIT {
     @Autowired
     SondageService sondageService;
 
