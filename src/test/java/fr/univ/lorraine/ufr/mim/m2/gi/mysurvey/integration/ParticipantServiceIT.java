@@ -1,8 +1,7 @@
 package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.integration;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.ParticipantService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.ParticipantService;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 @Transactional
@@ -79,7 +78,7 @@ public class ParticipantServiceIT {
     @Test
     void editParticipantNotFoundShouldBeNull() {
         var res = this.participantService.update(Long.MIN_VALUE, new Participant(null, "name", "fname"));
-        Assertions.assertEquals(null, res);
+        Assertions.assertNull(res);
     }
 
     @Test
@@ -126,7 +125,7 @@ public class ParticipantServiceIT {
 
     @Test
     void getByNotExistingIdShouldBeNull() {
-        Assertions.assertEquals(null, this.participantService.getById(Long.MIN_VALUE));
+        Assertions.assertNull(this.participantService.getById(Long.MIN_VALUE));
     }
 
     @Test

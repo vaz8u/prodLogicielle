@@ -29,7 +29,8 @@ public class Participant {
     @OneToMany(mappedBy = "participant", cascade = CascadeType.ALL)
     private List<DateSondee> dateSondee = new ArrayList<>();
 
-    public Participant() {}
+    public Participant() {
+    }
 
     public Participant(Long participantId, String nom, String prenom) {
         this.participantId = participantId;

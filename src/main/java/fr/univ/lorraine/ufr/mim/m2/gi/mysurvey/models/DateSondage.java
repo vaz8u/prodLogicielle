@@ -27,7 +27,8 @@ public class DateSondage {
     @OneToMany(mappedBy = "dateSondage", cascade = CascadeType.ALL)
     private List<DateSondee> dateSondee = new ArrayList<>();
 
-    public DateSondage() {}
+    public DateSondage() {
+    }
 
     public DateSondage(Long dateSondageId, Date date, Sondage sondage, List<DateSondee> dateSondee) {
         this.dateSondageId = dateSondageId;

@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/sondage")
-@Api(tags="API Sondage")
+@Api(tags = "API Sondage")
 public class SondageController {
 
     private final SondageService service;

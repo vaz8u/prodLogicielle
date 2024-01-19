@@ -1,6 +1,8 @@
 package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.endtoend;
 
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.*;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.CommentaireDto;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.ParticipantDto;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.SondageDto;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -8,7 +10,9 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import java.util.Date;
+
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,14 +22,15 @@ public class CommentaireTestEndToEnd {
     private static final String API_BASE_PATH = "/api/commentaire/";
 
     @BeforeEach
-    void setup(){
+    void setup() {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = 8080;
     }
+
     @Test
-    void commentaireTestEndToEnd(){
+    void commentaireTestEndToEnd() {
         Response res;
-        
+
         //Création d'un participant
         ParticipantDto participantDto = new ParticipantDto();
         participantDto.setParticipantId(1L);

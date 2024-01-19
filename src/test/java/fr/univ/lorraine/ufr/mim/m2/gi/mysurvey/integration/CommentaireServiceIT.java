@@ -1,7 +1,11 @@
 package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.integration;
 
-import java.util.Date;
-
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Commentaire;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Sondage;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.CommentaireService;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.ParticipantService;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.SondageService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,12 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Commentaire;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Sondage;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.CommentaireService;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.ParticipantService;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.SondageService;
+import java.util.Date;
 
 @SpringBootTest
 @Transactional
@@ -122,7 +121,7 @@ public class CommentaireServiceIT {
     @Test
     void editCommentaireNotFoundShouldBeNull() {
         var res = this.commentaireService.update(Long.MIN_VALUE, new Commentaire());
-        Assertions.assertEquals(null, res);
+        Assertions.assertNull(res);
     }
 
     @Test

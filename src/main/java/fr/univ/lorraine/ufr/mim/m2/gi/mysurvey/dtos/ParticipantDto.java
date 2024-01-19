@@ -8,7 +8,8 @@ public class ParticipantDto {
     private String nom;
     private String prenom;
 
-    public ParticipantDto() {}
+    public ParticipantDto() {
+    }
 
     public Long getParticipantId() {
         return participantId;

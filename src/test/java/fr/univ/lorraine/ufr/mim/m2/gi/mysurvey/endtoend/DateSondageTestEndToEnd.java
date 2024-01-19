@@ -12,7 +12,9 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import java.util.Date;
+
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,13 +24,13 @@ public class DateSondageTestEndToEnd {
     private static final String API_BASE_PATH = "/api/date/";
 
     @BeforeEach
-    void setup(){
+    void setup() {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = 8080;
     }
 
     @Test
-    void dateSondageTestEndToEnd(){
+    void dateSondageTestEndToEnd() {
         Response res;
 
         //Création d'un participant
@@ -96,7 +98,7 @@ public class DateSondageTestEndToEnd {
                 .statusCode(201)
                 .extract()
                 .response();
-        DateSondeeDto createdDateSondee= res.as(DateSondeeDto.class);
+        DateSondeeDto createdDateSondee = res.as(DateSondeeDto.class);
         Long dateSondeeId = createdDateSondee.getDateSondeeId();
         assertEquals(createdDateSondee.getDateSondeeId(), dateSondeeId);
         assertEquals(createdDateSondee.getParticipant(), dateSondeeDto.getParticipant());

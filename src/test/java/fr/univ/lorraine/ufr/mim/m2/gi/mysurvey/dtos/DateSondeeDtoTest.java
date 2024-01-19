@@ -1,4 +1,5 @@
 package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

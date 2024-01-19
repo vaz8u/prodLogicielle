@@ -8,7 +8,8 @@ public class CommentaireDto {
     private String commentaire;
     private Long participant;
 
-    public CommentaireDto() {}
+    public CommentaireDto() {
+    }
 
     public Long getCommentaireId() {
         return commentaireId;

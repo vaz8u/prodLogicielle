@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/date")
-@Api(tags="API DateSondage")
+@Api(tags = "API DateSondage")
 public class DateSondageController {
 
     private final DateSondageService service;

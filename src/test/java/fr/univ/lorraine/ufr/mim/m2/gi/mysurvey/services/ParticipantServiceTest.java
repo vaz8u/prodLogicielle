@@ -91,7 +91,7 @@ class ParticipantServiceTest {
         result.setPrenom(prenom);
         result.setNom(nom);
 
-        assertDto(participantToCreate,result);
+        assertDto(participantToCreate, result);
     }
 
     @Test
