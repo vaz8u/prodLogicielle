@@ -35,7 +35,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Build and run db service
-        run: docker-compose -f docker-compose.yml up -d db
+        run: docker-compose up db
       - name: Show running containers
         run: docker ps
       - name: Build and analyze
