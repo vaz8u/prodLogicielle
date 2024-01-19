@@ -17,3 +17,8 @@ Il contient aussi une image pour la base de données postgres.
 
 [![Jacoco Coverage](https://github.com/vaz8u/prodLogicielle/blob/gh-pages/jacoco/jacoco.svg)](https://vaz8u.github.io/prodLogicielle/jacoco/index.html)
 
+## Sonarcloud
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fr.univ.lorraine.ufr.mim.m2.gi%3AMySurvey&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fr.univ.lorraine.ufr.mim.m2.gi%3AMySurvey)
+
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=fr.univ.lorraine.ufr.mim.m2.gi%3AMySurvey&metric=coverage)](https://sonarcloud.io/summary/new_code?id=fr.univ.lorraine.ufr.mim.m2.gi%3AMySurvey)
