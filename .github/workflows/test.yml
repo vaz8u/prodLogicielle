@@ -21,12 +21,23 @@ jobs:
           java-version: 11
           distribution: 'temurin'
 
+      name: Set up Docker compose
+      - uses: KengoTODA/actions-setup-docker-compose@v1
+        with:
+          version: '2.14.2' # the full version of `docker-compose` command
+
       - name: Cache Maven packages
         uses: actions/cache@v3
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+
+      - name: Build and run db service
+      run: docker-compose -f docker-compose.yml up -d db
+
+      - name: Show running containers
+        run: docker ps
 
       - name: Build and test
         run: mvn -B verify
