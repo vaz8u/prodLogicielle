@@ -37,7 +37,7 @@ jobs:
       - name: Publish coverage report to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: target/site
+          folder: target/pit-reports/
           token: ${{ secrets.ACCES_READ_WRITE }}
 
       - name: Upload Pitest coverage report
