@@ -33,6 +33,18 @@ jobs:
       - name: Run Project
         run : java -jar target/*.jar &
 
+      - name: Attendre que l'application soit lancée
+        uses: kamilchodola/wait-for-workflow-action@1.1.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.ACCES_READ_WRITE }}
+          workflow_id: 'mutation.yml'
+          max_wait_minutes: '1'
+          interval: '5'
+          timeout: '60'
+          org_name: 'vaz8u'
+          repo_name: 'prodLogicielle'
+          ref: '${{ github.ref }}'
+
       - name: Mutations
         run: mvn clean test org.pitest:pitest-maven:mutationCoverage
 
