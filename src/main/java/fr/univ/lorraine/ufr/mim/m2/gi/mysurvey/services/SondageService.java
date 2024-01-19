@@ -18,7 +18,7 @@ public class SondageService {
     }
 
     public Sondage getById(Long id) {
-        return repository.getById(id);
+        return repository.findById(id).orElse(null);
     }
 
     public List<Sondage> getAll() {

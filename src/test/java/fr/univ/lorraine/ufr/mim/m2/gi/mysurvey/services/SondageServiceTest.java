@@ -35,11 +35,11 @@ class SondageServiceTest {
     @DisplayName("Test getById method")
     void testGetById() {
         Sondage sampleSondage = new Sondage();
-        when(repository.getById(anyLong())).thenReturn(sampleSondage);
+        when(repository.findById(anyLong())).thenReturn(Optional.of(sampleSondage));
 
         Sondage result = sondageService.getById(1L);
 
-        assertDto(sampleSondage,result);
+        assertDto(sampleSondage, result);
     }
 
     @Test
@@ -65,7 +65,7 @@ class SondageServiceTest {
 
         Sondage result = sondageService.create(1L, sondageToCreate);
 
-        assertDto(sondageToCreate,result);
+        assertDto(sondageToCreate, result);
     }
 
     @Test
@@ -85,8 +85,8 @@ class SondageServiceTest {
 
         Sondage result = sondageService.update(sondageId, updatedSondage);
 
-        assertDto(updatedSondage,result);
-        assertEquals(expectedName,result.getNom());
+        assertDto(updatedSondage, result);
+        assertEquals(expectedName, result.getNom());
 
         verify(repository, times(1)).findById(sondageId);
         verify(repository, times(1)).save(updatedSondage);
