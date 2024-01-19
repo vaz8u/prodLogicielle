@@ -9,13 +9,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDto;
+import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDtoListSize;
 import org.modelmapper.ModelMapper;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDto;
-import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDtoListSize;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
