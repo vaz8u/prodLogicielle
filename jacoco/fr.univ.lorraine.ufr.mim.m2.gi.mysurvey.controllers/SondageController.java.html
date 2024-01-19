@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SondageController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MySurvey</a> &gt; <a href="index.source.html" class="el_package">fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.controllers</a> &gt; <span class="el_source">SondageController.java</span></div><h1>SondageController.java</h1><pre class="source lang-java linenums">package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.controllers;
+
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.CommentaireDto;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.DateSondageDto;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.SondageDto;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Commentaire;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.DateSondage;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Sondage;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.CommentaireService;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.DateSondageService;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.DateSondeeService;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.SondageService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping(value = &quot;/api/sondage&quot;)
+@Api(tags=&quot;API Sondage&quot;)
+public class SondageController {
+
+    private final SondageService service;
+    private final CommentaireService scommentaire;
+    private final DateSondageService sdate;
+    private final DateSondeeService request;
+    private final ModelMapper mapper;
+
+<span class="fc" id="L34">    public SondageController(SondageService service, ModelMapper mapper, CommentaireService c, DateSondageService d, DateSondeeService r) {</span>
+<span class="fc" id="L35">        this.service = service;</span>
+<span class="fc" id="L36">        this.mapper = mapper;</span>
+<span class="fc" id="L37">        this.sdate = d;</span>
+<span class="fc" id="L38">        this.scommentaire = c;</span>
+<span class="fc" id="L39">        this.request = r;</span>
+<span class="fc" id="L40">    }</span>
+
+    @GetMapping(value = &quot;/{id}&quot;)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @ApiOperation(value = &quot;Récupérer un sondage&quot;)
+    public SondageDto get(@PathVariable(&quot;id&quot;) Long id) {
+<span class="fc" id="L47">        var model = service.getById(id);</span>
+<span class="fc" id="L48">        return mapper.map(model, SondageDto.class);</span>
+    }
+
+    @GetMapping(value = &quot;/{id}/best&quot;)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @ApiOperation(value = &quot;Récupérer les meilleurs dates d'un sondage&quot;)
+    public List&lt;Date&gt; getBest(@PathVariable(&quot;id&quot;) Long id) {
+<span class="fc" id="L56">        return request.bestDate(id);</span>
+    }
+
+    @GetMapping(value = &quot;/{id}/maybe&quot;)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @ApiOperation(value = &quot;Récupérer les éventuelles meilleures dates d'un sondage&quot;)
+    public List&lt;Date&gt; getMaybeBest(@PathVariable(&quot;id&quot;) Long id) {
+<span class="fc" id="L64">        return request.maybeBestDate(id);</span>
+    }
+
+    @GetMapping(value = &quot;/&quot;)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @ApiOperation(value = &quot;Récupérer tous les sondages&quot;)
+    public List&lt;SondageDto&gt; get() {
+<span class="fc" id="L72">        var models = service.getAll();</span>
+
+<span class="fc" id="L74">        return models.stream()</span>
+<span class="fc" id="L75">                .map(model -&gt; mapper.map(model, SondageDto.class))</span>
+<span class="fc" id="L76">                .collect(Collectors.toList());</span>
+    }
+
+    @GetMapping(value = &quot;/{id}/commentaires&quot;)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @ApiOperation(value = &quot;Récupérer tous les commentaires d'un sondage&quot;)
+    public List&lt;CommentaireDto&gt; getCommentaires(@PathVariable(&quot;id&quot;) Long id) {
+<span class="fc" id="L84">        var models = scommentaire.getBySondageId(id);</span>
+<span class="fc" id="L85">        return models.stream()</span>
+<span class="fc" id="L86">                .map(model -&gt; mapper.map(model, CommentaireDto.class))</span>
+<span class="fc" id="L87">                .collect(Collectors.toList());</span>
+    }
+
+    @GetMapping(value = &quot;/{id}/dates&quot;)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @ApiOperation(value = &quot;Récupérer toutes les dates d'un sondage&quot;)
+    public List&lt;DateSondageDto&gt; getDates(@PathVariable(&quot;id&quot;) Long id) {
+<span class="fc" id="L95">        var models = sdate.getBySondageId(id);</span>
+<span class="fc" id="L96">        return models.stream()</span>
+<span class="fc" id="L97">                .map(model -&gt; mapper.map(model, DateSondageDto.class))</span>
+<span class="fc" id="L98">                .collect(Collectors.toList());</span>
+    }
+
+    @PostMapping(value = &quot;/&quot;)
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    @ApiOperation(value = &quot;Créer un nouveau sondage&quot;)
+    public SondageDto create(@RequestBody SondageDto sondageDto) {
+<span class="fc" id="L106">        var model = mapper.map(sondageDto, Sondage.class);</span>
+<span class="fc" id="L107">        var result = service.create(sondageDto.getCreateBy(), model);</span>
+<span class="fc" id="L108">        return mapper.map(result, SondageDto.class);</span>
+    }
+
+    @PostMapping(value = &quot;/{id}/commentaires&quot;)
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    @ApiOperation(value = &quot;Ajouter un commentaire à un sondage&quot;)
+    public CommentaireDto createCommantaire(@PathVariable(&quot;id&quot;) Long id, @RequestBody CommentaireDto commantaireDto) {
+<span class="fc" id="L116">        var model = mapper.map(commantaireDto, Commentaire.class);</span>
+<span class="fc" id="L117">        var result = scommentaire.addCommantaire(id, commantaireDto.getParticipant(), model);</span>
+<span class="fc" id="L118">        return mapper.map(result, CommentaireDto.class);</span>
+    }
+
+    @PostMapping(value = &quot;/{id}/dates&quot;)
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    @ApiOperation(value = &quot;Ajouter une date à un sondage&quot;)
+    public DateSondageDto createDate(@PathVariable(&quot;id&quot;) Long id, @RequestBody DateSondageDto dto) {
+<span class="fc" id="L126">        var model = mapper.map(dto, DateSondage.class);</span>
+<span class="fc" id="L127">        var result = sdate.create(id, model);</span>
+<span class="fc" id="L128">        return mapper.map(result, DateSondageDto.class);</span>
+    }
+
+    @PutMapping(value = &quot;/{id}&quot;)
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = &quot;Mettre à jour un sondage&quot;)
+    public SondageDto update(@PathVariable(&quot;id&quot;) Long id, @RequestBody SondageDto sondageDto) {
+<span class="fc" id="L135">        var model = mapper.map(sondageDto, Sondage.class);</span>
+<span class="fc" id="L136">        var result = service.update(id, model);</span>
+<span class="fc" id="L137">        return mapper.map(result, SondageDto.class);</span>
+    }
+
+    @DeleteMapping(value = &quot;/{id}&quot;)
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = &quot;Supprimer un sondage&quot;)
+    public void delete(@PathVariable(&quot;id&quot;) Long id) {
+<span class="fc" id="L144">        service.delete(id);</span>
+<span class="fc" id="L145">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
