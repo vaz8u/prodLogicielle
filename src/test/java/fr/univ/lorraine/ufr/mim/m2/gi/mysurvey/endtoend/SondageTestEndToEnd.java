@@ -71,7 +71,6 @@ public class SondageTestEndToEnd {
         Participant createdParticipant2 = res.as(Participant.class);
         Long participant2Id = createdParticipant2.getParticipantId();
 
-
         //Récuperation de tous les sondages
         //Test si la liste de sondages est vide
         //Test si la liste de sondages n'est pas vide
@@ -376,7 +375,6 @@ public class SondageTestEndToEnd {
                 .extract()
                 .response();
 
-        System.out.println(sondageId);
         res = given()
                 .contentType(ContentType.JSON)
                 .body(dateSondeeDto1)
@@ -493,6 +491,5 @@ public class SondageTestEndToEnd {
                 .statusCode(500)
                 .extract()
                 .response();
-
     }
 }
