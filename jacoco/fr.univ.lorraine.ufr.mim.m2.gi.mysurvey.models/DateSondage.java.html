@@ -27,45 +27,46 @@ public class DateSondage {
 <span class="fc" id="L27">    @OneToMany(mappedBy = &quot;dateSondage&quot;, cascade = CascadeType.ALL)</span>
     private List&lt;DateSondee&gt; dateSondee = new ArrayList&lt;&gt;();
 
-<span class="fc" id="L30">    public DateSondage() {}</span>
+<span class="fc" id="L30">    public DateSondage() {</span>
+<span class="fc" id="L31">    }</span>
 
-<span class="fc" id="L32">    public DateSondage(Long dateSondageId, Date date, Sondage sondage, List&lt;DateSondee&gt; dateSondee) {</span>
-<span class="fc" id="L33">        this.dateSondageId = dateSondageId;</span>
-<span class="fc" id="L34">        this.date = date;</span>
-<span class="fc" id="L35">        this.sondage = sondage;</span>
-<span class="fc" id="L36">        this.dateSondee = dateSondee;</span>
-<span class="fc" id="L37">    }</span>
+<span class="fc" id="L33">    public DateSondage(Long dateSondageId, Date date, Sondage sondage, List&lt;DateSondee&gt; dateSondee) {</span>
+<span class="fc" id="L34">        this.dateSondageId = dateSondageId;</span>
+<span class="fc" id="L35">        this.date = date;</span>
+<span class="fc" id="L36">        this.sondage = sondage;</span>
+<span class="fc" id="L37">        this.dateSondee = dateSondee;</span>
+<span class="fc" id="L38">    }</span>
 
     public Long getDateSondageId() {
-<span class="fc" id="L40">        return dateSondageId;</span>
+<span class="fc" id="L41">        return dateSondageId;</span>
     }
 
     public void setDateSondageId(Long dateSondageId) {
-<span class="fc" id="L44">        this.dateSondageId = dateSondageId;</span>
-<span class="fc" id="L45">    }</span>
+<span class="fc" id="L45">        this.dateSondageId = dateSondageId;</span>
+<span class="fc" id="L46">    }</span>
 
     public Date getDate() {
-<span class="fc" id="L48">        return date;</span>
+<span class="fc" id="L49">        return date;</span>
     }
 
     public void setDate(Date date) {
-<span class="fc" id="L52">        this.date = date;</span>
-<span class="fc" id="L53">    }</span>
+<span class="fc" id="L53">        this.date = date;</span>
+<span class="fc" id="L54">    }</span>
 
     public Sondage getSondage() {
-<span class="fc" id="L56">        return sondage;</span>
+<span class="fc" id="L57">        return sondage;</span>
     }
 
     public void setSondage(Sondage sondage) {
-<span class="fc" id="L60">        this.sondage = sondage;</span>
-<span class="fc" id="L61">    }</span>
+<span class="fc" id="L61">        this.sondage = sondage;</span>
+<span class="fc" id="L62">    }</span>
 
     public List&lt;DateSondee&gt; getDateSondee() {
-<span class="fc" id="L64">        return dateSondee;</span>
+<span class="fc" id="L65">        return dateSondee;</span>
     }
 
     public void setDateSondee(List&lt;DateSondee&gt; dateSondee) {
-<span class="fc" id="L68">        this.dateSondee = dateSondee;</span>
-<span class="fc" id="L69">    }</span>
+<span class="fc" id="L69">        this.dateSondee = dateSondee;</span>
+<span class="fc" id="L70">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

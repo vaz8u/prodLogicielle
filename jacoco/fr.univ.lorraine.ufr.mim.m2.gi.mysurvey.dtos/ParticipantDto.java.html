@@ -8,48 +8,49 @@ public class ParticipantDto {
     private String nom;
     private String prenom;
 
-<span class="fc" id="L11">    public ParticipantDto() {}</span>
+<span class="fc" id="L11">    public ParticipantDto() {</span>
+<span class="fc" id="L12">    }</span>
 
     public Long getParticipantId() {
-<span class="fc" id="L14">        return participantId;</span>
+<span class="fc" id="L15">        return participantId;</span>
     }
 
     public void setParticipantId(Long participantId) {
-<span class="fc" id="L18">        this.participantId = participantId;</span>
-<span class="fc" id="L19">    }</span>
+<span class="fc" id="L19">        this.participantId = participantId;</span>
+<span class="fc" id="L20">    }</span>
 
     public String getNom() {
-<span class="fc" id="L22">        return nom;</span>
+<span class="fc" id="L23">        return nom;</span>
     }
 
     public void setNom(String nom) {
-<span class="fc" id="L26">        this.nom = nom;</span>
-<span class="fc" id="L27">    }</span>
+<span class="fc" id="L27">        this.nom = nom;</span>
+<span class="fc" id="L28">    }</span>
 
     public String getPrenom() {
-<span class="fc" id="L30">        return prenom;</span>
+<span class="fc" id="L31">        return prenom;</span>
     }
 
     public void setPrenom(String prenom) {
-<span class="fc" id="L34">        this.prenom = prenom;</span>
-<span class="fc" id="L35">    }</span>
+<span class="fc" id="L35">        this.prenom = prenom;</span>
+<span class="fc" id="L36">    }</span>
 
     @Override
     public boolean equals(Object o) {
-<span class="fc bfc" id="L39" title="All 2 branches covered.">        if (this == o) return true;</span>
-<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (!(o instanceof ParticipantDto)) return false;</span>
-<span class="fc" id="L41">        ParticipantDto that = (ParticipantDto) o;</span>
-<span class="fc bfc" id="L42" title="All 6 branches covered.">        return Objects.equals(getParticipantId(), that.getParticipantId()) &amp;&amp; Objects.equals(getNom(), that.getNom()) &amp;&amp; Objects.equals(getPrenom(), that.getPrenom());</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (this == o) return true;</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (!(o instanceof ParticipantDto)) return false;</span>
+<span class="fc" id="L42">        ParticipantDto that = (ParticipantDto) o;</span>
+<span class="fc bfc" id="L43" title="All 6 branches covered.">        return Objects.equals(getParticipantId(), that.getParticipantId()) &amp;&amp; Objects.equals(getNom(), that.getNom()) &amp;&amp; Objects.equals(getPrenom(), that.getPrenom());</span>
     }
 
     @Override
     public int hashCode() {
-<span class="fc" id="L47">        return Objects.hash(getParticipantId(), getNom(), getPrenom());</span>
+<span class="fc" id="L48">        return Objects.hash(getParticipantId(), getNom(), getPrenom());</span>
     }
 
     @Override
     public String toString() {
-<span class="fc" id="L52">        return &quot;ParticipantDto{&quot; + &quot;participantId=&quot; + participantId + &quot;, nom='&quot; + nom + '\'' + &quot;, prenom='&quot; + prenom + '\'' + '}';</span>
+<span class="fc" id="L53">        return &quot;ParticipantDto{&quot; + &quot;participantId=&quot; + participantId + &quot;, nom='&quot; + nom + '\'' + &quot;, prenom='&quot; + prenom + '\'' + '}';</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

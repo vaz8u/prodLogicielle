@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Commentaire.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MySurvey</a> &gt; <a href="index.source.html" class="el_package">fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models</a> &gt; <span class="el_source">Commentaire.java</span></div><h1>Commentaire.java</h1><pre class="source lang-java linenums">package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 /**
  * Classe de commentaire d'un {@link Sondage}
@@ -18,48 +17,48 @@ public class Commentaire {
     @Column(name = &quot;commentaire&quot;)
     private String commentaire;
 
-<span class="fc" id="L21">    @ManyToOne(fetch = FetchType.LAZY)</span>
+<span class="fc" id="L20">    @ManyToOne(fetch = FetchType.LAZY)</span>
     @JoinColumn(name = &quot;sondage_id&quot;)
     private Sondage sondage = new Sondage();
 
-<span class="fc" id="L25">    @ManyToOne(fetch = FetchType.LAZY)</span>
+<span class="fc" id="L24">    @ManyToOne(fetch = FetchType.LAZY)</span>
     @JoinColumn(name = &quot;participant_id&quot;)
     private Participant participant = new Participant();
 
-<span class="fc" id="L29">    public Commentaire() {</span>
-<span class="fc" id="L30">    }</span>
+<span class="fc" id="L28">    public Commentaire() {</span>
+<span class="fc" id="L29">    }</span>
 
     public Long getCommentaireId() {
-<span class="fc" id="L33">        return commentaireId;</span>
+<span class="fc" id="L32">        return commentaireId;</span>
     }
 
     public void setCommentaireId(Long commentaireId) {
-<span class="fc" id="L37">        this.commentaireId = commentaireId;</span>
-<span class="fc" id="L38">    }</span>
+<span class="fc" id="L36">        this.commentaireId = commentaireId;</span>
+<span class="fc" id="L37">    }</span>
 
     public String getCommentaire() {
-<span class="fc" id="L41">        return commentaire;</span>
+<span class="fc" id="L40">        return commentaire;</span>
     }
 
     public void setCommentaire(String commentaire) {
-<span class="fc" id="L45">        this.commentaire = commentaire;</span>
-<span class="fc" id="L46">    }</span>
+<span class="fc" id="L44">        this.commentaire = commentaire;</span>
+<span class="fc" id="L45">    }</span>
 
     public Sondage getSondage() {
-<span class="fc" id="L49">        return sondage;</span>
+<span class="fc" id="L48">        return sondage;</span>
     }
 
     public void setSondage(Sondage sondage) {
-<span class="fc" id="L53">        this.sondage = sondage;</span>
-<span class="fc" id="L54">    }</span>
+<span class="fc" id="L52">        this.sondage = sondage;</span>
+<span class="fc" id="L53">    }</span>
 
     public Participant getParticipant() {
-<span class="fc" id="L57">        return participant;</span>
+<span class="fc" id="L56">        return participant;</span>
     }
 
     public void setParticipant(Participant participant) {
-<span class="fc" id="L61">        this.participant = participant;</span>
-<span class="fc" id="L62">    }</span>
+<span class="fc" id="L60">        this.participant = participant;</span>
+<span class="fc" id="L61">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

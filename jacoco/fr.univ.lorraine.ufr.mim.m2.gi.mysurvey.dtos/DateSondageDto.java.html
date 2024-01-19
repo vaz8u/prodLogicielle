@@ -8,35 +8,36 @@ public class DateSondageDto {
     private Long dateSondageId;
     private Date date;
 
-<span class="fc" id="L11">    public DateSondageDto() {}</span>
+<span class="fc" id="L11">    public DateSondageDto() {</span>
+<span class="fc" id="L12">    }</span>
 
     public Long getDateSondageId() {
-<span class="fc" id="L14">        return dateSondageId;</span>
+<span class="fc" id="L15">        return dateSondageId;</span>
     }
 
     public void setDateSondageId(Long dateSondageId) {
-<span class="fc" id="L18">        this.dateSondageId = dateSondageId;</span>
-<span class="fc" id="L19">    }</span>
+<span class="fc" id="L19">        this.dateSondageId = dateSondageId;</span>
+<span class="fc" id="L20">    }</span>
 
     public Date getDate() {
-<span class="fc" id="L22">        return date;</span>
+<span class="fc" id="L23">        return date;</span>
     }
 
     public void setDate(Date date) {
-<span class="fc" id="L26">        this.date = date;</span>
-<span class="fc" id="L27">    }</span>
+<span class="fc" id="L27">        this.date = date;</span>
+<span class="fc" id="L28">    }</span>
 
     @Override
     public boolean equals(Object o) {
-<span class="fc bfc" id="L31" title="All 2 branches covered.">        if (this == o) return true;</span>
-<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (!(o instanceof DateSondageDto)) return false;</span>
-<span class="fc" id="L33">        DateSondageDto that = (DateSondageDto) o;</span>
-<span class="fc bfc" id="L34" title="All 4 branches covered.">        return Objects.equals(getDateSondageId(), that.getDateSondageId()) &amp;&amp; Objects.equals(getDate(), that.getDate());</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (this == o) return true;</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (!(o instanceof DateSondageDto)) return false;</span>
+<span class="fc" id="L34">        DateSondageDto that = (DateSondageDto) o;</span>
+<span class="fc bfc" id="L35" title="All 4 branches covered.">        return Objects.equals(getDateSondageId(), that.getDateSondageId()) &amp;&amp; Objects.equals(getDate(), that.getDate());</span>
     }
 
     @Override
     public int hashCode() {
-<span class="fc" id="L39">        return Objects.hash(getDateSondageId(), getDate());</span>
+<span class="fc" id="L40">        return Objects.hash(getDateSondageId(), getDate());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

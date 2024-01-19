@@ -22,45 +22,46 @@ public class DateSondee {
     @Enumerated(EnumType.STRING)
     private Choix choix;
 
-<span class="fc" id="L25">    public DateSondee() {}</span>
+<span class="fc" id="L25">    public DateSondee() {</span>
+<span class="fc" id="L26">    }</span>
 
-<span class="fc" id="L27">    public DateSondee(Long dateSondeeId, DateSondage dateSondage, Participant participant, Choix choix) {</span>
-<span class="fc" id="L28">        this.dateSondeeId = dateSondeeId;</span>
-<span class="fc" id="L29">        this.dateSondage = dateSondage;</span>
-<span class="fc" id="L30">        this.participant = participant;</span>
-<span class="fc" id="L31">        this.choix = choix;</span>
-<span class="fc" id="L32">    }</span>
+<span class="fc" id="L28">    public DateSondee(Long dateSondeeId, DateSondage dateSondage, Participant participant, Choix choix) {</span>
+<span class="fc" id="L29">        this.dateSondeeId = dateSondeeId;</span>
+<span class="fc" id="L30">        this.dateSondage = dateSondage;</span>
+<span class="fc" id="L31">        this.participant = participant;</span>
+<span class="fc" id="L32">        this.choix = choix;</span>
+<span class="fc" id="L33">    }</span>
 
     public Long getDateSondeeId() {
-<span class="fc" id="L35">        return dateSondeeId;</span>
+<span class="fc" id="L36">        return dateSondeeId;</span>
     }
 
     public void setDateSondeeId(Long dateSondeeId) {
-<span class="fc" id="L39">        this.dateSondeeId = dateSondeeId;</span>
-<span class="fc" id="L40">    }</span>
+<span class="fc" id="L40">        this.dateSondeeId = dateSondeeId;</span>
+<span class="fc" id="L41">    }</span>
 
     public DateSondage getDateSondage() {
-<span class="fc" id="L43">        return dateSondage;</span>
+<span class="fc" id="L44">        return dateSondage;</span>
     }
 
     public void setDateSondage(DateSondage dateSondage) {
-<span class="fc" id="L47">        this.dateSondage = dateSondage;</span>
-<span class="fc" id="L48">    }</span>
+<span class="fc" id="L48">        this.dateSondage = dateSondage;</span>
+<span class="fc" id="L49">    }</span>
 
     public Participant getParticipant() {
-<span class="fc" id="L51">        return participant;</span>
+<span class="fc" id="L52">        return participant;</span>
     }
 
     public void setParticipant(Participant participant) {
-<span class="fc" id="L55">        this.participant = participant;</span>
-<span class="fc" id="L56">    }</span>
+<span class="fc" id="L56">        this.participant = participant;</span>
+<span class="fc" id="L57">    }</span>
 
     public String getChoix() {
-<span class="fc" id="L59">        return choix.name();</span>
+<span class="fc" id="L60">        return choix.name();</span>
     }
 
     public void setChoix(String choix) {
-<span class="fc" id="L63">        this.choix = Choix.valueOf(choix);</span>
-<span class="fc" id="L64">    }</span>
+<span class="fc" id="L64">        this.choix = Choix.valueOf(choix);</span>
+<span class="fc" id="L65">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
