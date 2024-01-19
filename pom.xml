@@ -88,6 +88,13 @@
                         <version>0.8</version>
                     </dependency>
                 </dependencies>
+                <!--exclure les memes que jacoco -->
+                <configuration>
+                    <excludedClasses>
+                        <excludedClass>fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.configurations.*</excludedClass>
+                        <excludedClass>fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.MySurveyApplication</excludedClass>
+                    </excludedClasses>
+                </configuration>
             </plugin>
         </plugins>
     </build>
