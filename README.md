@@ -15,5 +15,5 @@ Il contient aussi une image pour la base de données postgres.
 
 ## Code coverage
 
-![Jacoco Coverage](https://github.com/vaz8u/prodLogicielle/blob/gh-pages/jacoco/jacoco.svg)
+[![Jacoco Coverage](https://github.com/vaz8u/prodLogicielle/blob/gh-pages/jacoco/jacoco.svg)](https://vaz8u.github.io/prodLogicielle/jacoco/index.html)
 
