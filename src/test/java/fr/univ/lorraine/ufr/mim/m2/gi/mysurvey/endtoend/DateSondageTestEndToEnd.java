@@ -4,6 +4,7 @@ import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.DateSondageDto;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.DateSondeeDto;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.ParticipantDto;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.SondageDto;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Choix;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -86,7 +87,7 @@ public class DateSondageTestEndToEnd {
         //Test de la date sondée
         DateSondeeDto dateSondeeDto = new DateSondeeDto();
         dateSondeeDto.setParticipant(participantId);
-        dateSondeeDto.setChoix("DISPONIBLE");
+        dateSondeeDto.setChoix(String.valueOf(Choix.DISPONIBLE));
         res = given()
                 .contentType(ContentType.JSON)
                 .body(dateSondeeDto)

@@ -1,9 +1,8 @@
 package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.endtoend;
 
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.CommentaireDto;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.DateSondageDto;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.ParticipantDto;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.SondageDto;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.*;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Choix;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.DateSondage;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.repositories.ParticipantRepository;
 import io.restassured.RestAssured;
@@ -14,6 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -35,21 +37,39 @@ public class SondageTestEndToEnd {
     void sondageTestEndToEnd() {
         Response res;
 
-        //Création dun participant
-        ParticipantDto participantDto = new ParticipantDto();
-        participantDto.setNom("Man");
-        participantDto.setPrenom("Sam");
+        //Création d'un participant
+        ParticipantDto participantDto1 = new ParticipantDto();
+        participantDto1.setNom("Man");
+        participantDto1.setPrenom("Sam");
         res = given()
                 .contentType(ContentType.JSON)
-                .body(participantDto)
+                .contentType(ContentType.JSON)
+                .body(participantDto1)
                 .when()
                 .post("/api/participant/")
                 .then()
                 .statusCode(201)
                 .extract()
                 .response();
-        Participant createdParticipant = res.as(Participant.class);
-        Long participantId = createdParticipant.getParticipantId();
+        Participant createdParticipant1 = res.as(Participant.class);
+        Long participant1Id = createdParticipant1.getParticipantId();
+
+        //Création d'un participant
+        ParticipantDto participantDto2 = new ParticipantDto();
+        participantDto2.setNom("Man");
+        participantDto2.setPrenom("Sam");
+        res = given()
+                .contentType(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .body(participantDto2)
+                .when()
+                .post("/api/participant/")
+                .then()
+                .statusCode(201)
+                .extract()
+                .response();
+        Participant createdParticipant2 = res.as(Participant.class);
+        Long participant2Id = createdParticipant2.getParticipantId();
 
 
         //Récuperation de tous les sondages
@@ -80,7 +100,7 @@ public class SondageTestEndToEnd {
         //Création d'un sondage
         //Test si les données crée du sondage son bon
         SondageDto sondageDto = new SondageDto();
-        sondageDto.setCreateBy(participantId);
+        sondageDto.setCreateBy(participant1Id);
         sondageDto.setNom("Sondage Test");
         sondageDto.setCloture(false);
         sondageDto.setFin(new Date());
@@ -202,7 +222,7 @@ public class SondageTestEndToEnd {
         //Création d'un commentaire dans le sondage
         //Test si les données crée du commetaire son bon
         CommentaireDto commentaireDto = new CommentaireDto();
-        commentaireDto.setParticipant(participantId);
+        commentaireDto.setParticipant(participant1Id);
         commentaireDto.setCommentaire("Commentaire Test");
         res = given()
                 .contentType(ContentType.JSON)
@@ -238,11 +258,20 @@ public class SondageTestEndToEnd {
             assertEquals(firstCommentaire.getCommentaire(), commentaireDto.getCommentaire());
         }
 
+        //Dates maybe et dates best
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
 
-        //Création d'un date de sondage (1)
+        calendar.add(Calendar.MINUTE, 1);
+        Date date1 = calendar.getTime();
+        calendar.add(Calendar.MINUTE, 1);
+        Date date2 = calendar.getTime();
+
+        //Création d'une date de sondage (1)
         //Test si les données crée de la date de sondage son bon
         DateSondageDto dateSondage1Dto = new DateSondageDto();
-        dateSondage1Dto.setDate(new Date());
+        dateSondage1Dto.setDate(date1);
         res = given()
                 .contentType(ContentType.JSON)
                 .body(dateSondage1Dto)
@@ -257,10 +286,10 @@ public class SondageTestEndToEnd {
         assertEquals(createdDateSondage1.getDateSondageId(), dateSondage1Id);
         assertEquals(createdDateSondage1.getDate(), dateSondage1Dto.getDate());
 
-        //Création d'un date de sondage (2)
+        //Création d'une date de sondage (2)
         //Test si les données crée de la date de sondage son bon
         DateSondageDto dateSondage2Dto = new DateSondageDto();
-        dateSondage2Dto.setDate(new Date());
+        dateSondage2Dto.setDate(date2);
         res = given()
                 .contentType(ContentType.JSON)
                 .body(dateSondage2Dto)
@@ -293,9 +322,111 @@ public class SondageTestEndToEnd {
             assertEquals(firstDate.getDate(), dateSondage1Dto.getDate());
         }
 
+        //Participation du participant 1
+        //Création d'une date sondée 1 sur le sondage 1
+        DateSondeeDto dateSondeeDto1 = new DateSondeeDto();
+        dateSondeeDto1.setParticipant(participant1Id);
+        dateSondeeDto1.setChoix(String.valueOf(Choix.DISPONIBLE));
+        res = given()
+                .contentType(ContentType.JSON)
+                .body(dateSondeeDto1)
+                .when()
+                .post("/api/date/" + dateSondage1Id + "/participer/")
+                .then()
+                .statusCode(201)
+                .extract()
+                .response();
 
-        //TODO dates maybe
-        //TODO dates best
+        //Création d'une date sondée 1 sur le sondage 2
+        DateSondeeDto dateSondeeDto2 = new DateSondeeDto();
+        dateSondeeDto2.setParticipant(participant1Id);
+        dateSondeeDto2.setChoix(String.valueOf(Choix.PEUTETRE));
+        res = given()
+                .contentType(ContentType.JSON)
+                .body(dateSondeeDto2)
+                .when()
+                .post("/api/date/" + dateSondage2Id + "/participer/")
+                .then()
+                .statusCode(201)
+                .extract()
+                .response();
+
+        //Participation du participant 2
+        //Création d'une date sondée 1 sur le sondage 1
+        DateSondeeDto dateSondeeDto3 = new DateSondeeDto();
+        dateSondeeDto3.setParticipant(participant2Id);
+        dateSondeeDto3.setChoix(String.valueOf(Choix.DISPONIBLE));
+        res = given()
+                .contentType(ContentType.JSON)
+                .body(dateSondeeDto3)
+                .when()
+                .post("/api/date/" + dateSondage1Id + "/participer/")
+                .then()
+                .statusCode(201)
+                .extract()
+                .response();
+
+        //Création d'une date sondée 1 sur le sondage 2
+        DateSondeeDto dateSondeeDto4 = new DateSondeeDto();
+        dateSondeeDto4.setParticipant(participant2Id);
+        dateSondeeDto4.setChoix(String.valueOf(Choix.PEUTETRE));
+        res = given()
+                .contentType(ContentType.JSON)
+                .body(dateSondeeDto4)
+                .when()
+                .post("/api/date/" + dateSondage2Id + "/participer/")
+                .then()
+                .statusCode(201)
+                .extract()
+                .response();
+
+        System.out.println(sondageId);
+        res = given()
+                .contentType(ContentType.JSON)
+                .body(dateSondeeDto1)
+                .when()
+                .get(API_BASE_PATH + sondageId + "/dates/")
+                .then()
+                .statusCode(200)
+                .extract()
+                .response();
+        dates = res.jsonPath().getList(".", DateSondageDto.class);
+        assertEquals(dates.size(), 2);
+
+        res = given()
+                .contentType(ContentType.JSON)
+                .body(dateSondeeDto1)
+                .when()
+                .get(API_BASE_PATH + sondageId + "/best/")
+                .then()
+                .statusCode(200)
+                .extract()
+                .response();
+        List<String> dateBest = res.jsonPath().getList(".", String.class);
+        assertEquals(dateBest.size(), 1);
+        try {
+            assertEquals(date1, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").parse(dateBest.get(0)));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        res = given()
+                .contentType(ContentType.JSON)
+                .body(dateSondeeDto1)
+                .when()
+                .get(API_BASE_PATH + sondageId + "/maybe/")
+                .then()
+                .statusCode(200)
+                .extract()
+                .response();
+        List<String> dateMaybe = res.jsonPath().getList(".", String.class);
+        assertEquals(dateMaybe.size(), 2);
+        try {
+            assertEquals(date1, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").parse(dateMaybe.get(0)));
+            assertEquals(date2, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").parse(dateMaybe.get(1)));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
 
         //Suppression du commentaire
         res = given()
@@ -327,11 +458,21 @@ public class SondageTestEndToEnd {
                 .extract()
                 .response();
 
-        //Suppression du participant
+        //Suppression du participant 1
         res = given()
                 .contentType(ContentType.JSON)
                 .when()
-                .delete("/api/participant/" + participantId)
+                .delete("/api/participant/" + participant1Id)
+                .then()
+                .statusCode(200)
+                .extract()
+                .response();
+
+        //Suppression du participant 2
+        res = given()
+                .contentType(ContentType.JSON)
+                .when()
+                .delete("/api/participant/" + participant2Id)
                 .then()
                 .statusCode(200)
                 .extract()
@@ -356,5 +497,6 @@ public class SondageTestEndToEnd {
                 .statusCode(500)
                 .extract()
                 .response();
+
     }
 }
