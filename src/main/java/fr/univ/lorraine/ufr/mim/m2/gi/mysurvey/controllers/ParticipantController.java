@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/participant")
-@Api(tags="API Participant")
+@Api(tags = "API Participant")
 public class ParticipantController {
 
     private final ParticipantService service;

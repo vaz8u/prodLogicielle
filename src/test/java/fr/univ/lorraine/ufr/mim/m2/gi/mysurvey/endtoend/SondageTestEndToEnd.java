@@ -2,15 +2,12 @@ package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.endtoend;
 
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.*;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Choix;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.DateSondage;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.repositories.ParticipantRepository;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.text.ParseException;
@@ -22,13 +19,14 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 @SpringBootTest
 public class SondageTestEndToEnd {
 
     private static final String API_BASE_PATH = "/api/sondage/";
 
     @BeforeEach
-    void setup(){
+    void setup() {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = 8080;
     }
@@ -75,13 +73,13 @@ public class SondageTestEndToEnd {
         //Test si la liste de sondages est vide
         //Test si la liste de sondages n'est pas vide
         res = given()
-                    .contentType(ContentType.JSON)
-                    .when()
-                    .get(API_BASE_PATH)
-                    .then()
-                    .statusCode(200)
-                    .extract()
-                    .response();
+                .contentType(ContentType.JSON)
+                .when()
+                .get(API_BASE_PATH)
+                .then()
+                .statusCode(200)
+                .extract()
+                .response();
         List<SondageDto> sondages = res.jsonPath().getList(".", SondageDto.class);
         if (sondages.isEmpty()) {
             assertEquals(sondages.size(), 0);

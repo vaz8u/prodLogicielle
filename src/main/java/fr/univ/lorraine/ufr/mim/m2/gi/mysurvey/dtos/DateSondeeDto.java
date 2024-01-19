@@ -8,7 +8,8 @@ public class DateSondeeDto {
     private Long participant;
     private String choix;
 
-    public DateSondeeDto() {}
+    public DateSondeeDto() {
+    }
 
     public Long getDateSondeeId() {
         return dateSondeeId;

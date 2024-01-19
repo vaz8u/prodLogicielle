@@ -79,10 +79,10 @@ class DateSondageServiceTest {
     @DisplayName("Test create DateSondage with parameters")
     void testCreateWithParameters() {
         Long sondageId = 1L;
-        Long dateSondageId= 2L;
-        Date date= new Date();
-        Sondage sondage= new Sondage();
-        List< DateSondee > dateSondee = Collections.singletonList(new DateSondee());
+        Long dateSondageId = 2L;
+        Date date = new Date();
+        Sondage sondage = new Sondage();
+        List<DateSondee> dateSondee = Collections.singletonList(new DateSondee());
         DateSondage dateSondageToCreate = new DateSondage(dateSondageId, date, sondage, dateSondee);
 
         DateSondage expectedDateSondage = new DateSondage();
@@ -118,7 +118,7 @@ class DateSondageServiceTest {
 
     @Test
     @DisplayName("Test getDate")
-    void testGetDate(){
+    void testGetDate() {
         Long dateSondageId = 1L;
         DateSondage existingDateSondage = new DateSondage();
         existingDateSondage.setDateSondageId(dateSondageId);
@@ -132,14 +132,14 @@ class DateSondageServiceTest {
 
     @Test
     @DisplayName("Test getDateSondee")
-    void testGetDateSondee(){
+    void testGetDateSondee() {
         Long dateSondageId = 1L;
         DateSondage existingDateSondage = new DateSondage();
         existingDateSondage.setDateSondageId(dateSondageId);
-        List< DateSondee > dateSondee = Collections.singletonList(new DateSondee());
+        List<DateSondee> dateSondee = Collections.singletonList(new DateSondee());
         existingDateSondage.setDateSondee(dateSondee);
 
-        List< DateSondee > result = existingDateSondage.getDateSondee();
+        List<DateSondee> result = existingDateSondage.getDateSondee();
 
         assertEquals(dateSondee, result, "DateSondage should be deleted");
     }

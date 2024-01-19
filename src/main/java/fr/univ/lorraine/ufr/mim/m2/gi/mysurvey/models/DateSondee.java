@@ -22,7 +22,8 @@ public class DateSondee {
     @Enumerated(EnumType.STRING)
     private Choix choix;
 
-    public DateSondee() {}
+    public DateSondee() {
+    }
 
     public DateSondee(Long dateSondeeId, DateSondage dateSondage, Participant participant, Choix choix) {
         this.dateSondeeId = dateSondeeId;

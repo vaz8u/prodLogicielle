@@ -1,7 +1,6 @@
 package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 /**
  * Classe de commentaire d'un {@link Sondage}

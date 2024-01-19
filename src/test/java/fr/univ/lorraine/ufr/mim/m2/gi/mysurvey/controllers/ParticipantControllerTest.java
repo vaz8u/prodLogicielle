@@ -9,13 +9,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDto;
-import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDtoListSize;
 import org.modelmapper.ModelMapper;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDto;
+import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDtoListSize;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -41,7 +41,7 @@ class ParticipantControllerTest {
 
         ParticipantDto result = participantController.get(participantId);
 
-        assertDto(expectedDto,result);
+        assertDto(expectedDto, result);
 
         verify(participantService, times(1)).getById(participantId);
         verify(modelMapper, times(1)).map(expectedModel, ParticipantDto.class);
@@ -56,7 +56,7 @@ class ParticipantControllerTest {
 
         List<ParticipantDto> result = participantController.get();
 
-        assertDtoListSize(expectedModels,result);
+        assertDtoListSize(expectedModels, result);
 
         verify(participantService, times(1)).getAll();
         verify(modelMapper, times(expectedModels.size())).map(any(Participant.class), eq(ParticipantDto.class));
@@ -75,7 +75,7 @@ class ParticipantControllerTest {
 
         ParticipantDto result = participantController.create(participantDto);
 
-        assertDto(expectedDto,result);
+        assertDto(expectedDto, result);
 
         verify(modelMapper, times(1)).map(participantDto, Participant.class);
         verify(participantService, times(1)).create(expectedModel);
@@ -96,7 +96,7 @@ class ParticipantControllerTest {
 
         ParticipantDto result = participantController.update(participantId, participantDto);
 
-        assertDto(expectedDto,result);
+        assertDto(expectedDto, result);
 
         verify(modelMapper, times(1)).map(participantDto, Participant.class);
         verify(participantService, times(1)).update(participantId, expectedModel);

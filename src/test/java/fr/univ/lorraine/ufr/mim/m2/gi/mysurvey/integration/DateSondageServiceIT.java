@@ -1,23 +1,21 @@
 package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.integration;
 
-import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.DateSondage;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Sondage;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.ParticipantService;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.SondageService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.ParticipantService;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.SondageService;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.DateSondage;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Sondage;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 @SpringBootTest
 @Transactional
@@ -112,7 +110,7 @@ public class DateSondageServiceIT {
 
     @Test
     void getByNotExistingIdShouldBeNull() {
-        Assertions.assertEquals(null, this.dateSondageService.getById(Long.MIN_VALUE));
+        Assertions.assertNull(this.dateSondageService.getById(Long.MIN_VALUE));
     }
 
     @Test

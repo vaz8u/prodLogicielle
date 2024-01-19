@@ -120,6 +120,6 @@ class SondageDtosTest {
     void testHashCode() {
         SondageDto sondageDto = new SondageDto();
         int result = sondageDto.hashCode();
-        assertEquals(887503681, result, "hashCode should be 887503681 "+result);
+        assertEquals(887503681, result, "hashCode should be 887503681 " + result);
     }
 }
