@@ -31,7 +31,7 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Run Project
-        run : java -jar target/*.jar
+        run : java -jar target/*.jar &
 
       - name: Mutations
         run: mvn clean test org.pitest:pitest-maven:mutationCoverage
