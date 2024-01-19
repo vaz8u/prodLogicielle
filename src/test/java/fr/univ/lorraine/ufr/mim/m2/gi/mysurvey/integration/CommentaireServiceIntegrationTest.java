@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Commentaire;
@@ -121,7 +122,7 @@ class CommentaireServiceIntegrationTest {
 
     @Test
     void editCommentaireNotFoundShouldBeNull() {
-        var res = this.commentaireService.update(Long.MAX_VALUE, new Commentaire());
+        var res = this.commentaireService.update(Long.MIN_VALUE, new Commentaire());
         Assertions.assertEquals(null, res);
     }
 
@@ -136,6 +137,7 @@ class CommentaireServiceIntegrationTest {
         });
     }
 
+    @Test
     void deleteExistingCommentaireShouldWork() {
         var res = this.commentaireService.addCommantaire(this.sondage.getSondageId(),
                 this.participant.getParticipantId(), new Commentaire());
@@ -147,12 +149,14 @@ class CommentaireServiceIntegrationTest {
         Assertions.assertEquals(0, this.commentaireService.delete(res.getCommentaireId()));
     }
 
+    @Test
     void deleteNotExistingCommentaireShouldNotWork() {
-        Assertions.assertEquals(0, this.commentaireService.delete(Long.MAX_VALUE));
+        Assertions.assertEquals(0, this.commentaireService.delete(Long.MIN_VALUE));
     }
 
+    @Test
     void deleteByNullShouldException() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
+        Assertions.assertThrows(InvalidDataAccessApiUsageException.class, () -> {
             this.commentaireService.delete(null);
         });
     }
