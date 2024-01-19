@@ -1,6 +1,7 @@
 package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Classe de commentaire d'un {@link Sondage}
@@ -25,7 +26,8 @@ public class Commentaire {
     @JoinColumn(name = "participant_id")
     private Participant participant = new Participant();
 
-    public Commentaire() {}
+    public Commentaire() {
+    }
 
     public Long getCommentaireId() {
         return commentaireId;
@@ -58,4 +60,5 @@ public class Commentaire {
     public void setParticipant(Participant participant) {
         this.participant = participant;
     }
+
 }
