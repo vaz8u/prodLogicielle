@@ -2,9 +2,9 @@ name: Jacoco Code Coverage
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: ["develop"]
   pull_request:
-    branches: [ "develop" ]
+    branches: ["develop"]
 
 jobs:
   build:
@@ -18,7 +18,16 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: 11
-          distribution: 'temurin'
+          distribution: "temurin"
+
+      - name: Set up Docker compose
+        uses: KengoTODA/actions-setup-docker-compose@v1
+        with:
+          version: "2.14.2" # the full version of `docker-compose` command
+      - name: Build and run db service
+        run: docker-compose up
+      - name: Show running containers
+        run: docker ps
 
       - name: Build and test
         run: mvn clean verify
