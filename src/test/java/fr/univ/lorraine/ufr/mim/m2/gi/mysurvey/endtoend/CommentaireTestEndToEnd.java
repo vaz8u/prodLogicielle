@@ -78,7 +78,8 @@ public class CommentaireTestEndToEnd {
         CommentaireDto createdCommentaire = res.as(CommentaireDto.class);
         Long commentaireId = createdCommentaire.getCommentaireId();
 
-//TODO Modification
+        //Modification d'un commentaire
+        //Test si les données modifié du commentaire son bon
         commentaireDto.setCommentaire("Commentaire Test Modifié");
         res = given()
                 .contentType(ContentType.JSON)

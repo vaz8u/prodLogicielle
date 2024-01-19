@@ -120,28 +120,26 @@ public class SondageTestEndToEnd {
         assertEquals(createdSondage.getFin(), sondageDto.getFin());
         assertEquals(createdSondage.getDescription(), sondageDto.getDescription());
 
+        //Modification du sondage crée
+        //Test si les données modifié du sondage son bon
+        sondageDto.setDescription("Déscription modifié");
+        sondageDto.setNom("Nom modifié");
+        res = given()
+                .contentType(ContentType.JSON)
+                .body(sondageDto)
+                .when()
+                .put(API_BASE_PATH + sondageId)
+                .then()
+                .statusCode(200)
+                .extract()
+                .response();
+        createdSondage = res.as(SondageDto.class);
+        assertEquals(createdSondage.getCreateBy(), sondageDto.getCreateBy());
+        assertEquals(createdSondage.getNom(), sondageDto.getNom());
+        assertEquals(createdSondage.getCloture(), sondageDto.getCloture());
+        assertEquals(createdSondage.getFin(), sondageDto.getFin());
+        assertEquals(createdSondage.getDescription(), sondageDto.getDescription());
 
-
-//        //TODO modification
-//        sondageDto.setDescription("Déscription modifié");
-//        sondageDto.setNom("Nom modifié");
-//        res = given()
-//                .contentType(ContentType.JSON)
-//                .body(sondageDto)
-//                .when()
-//                .put(API_BASE_PATH + sondageId)
-//                .then()
-//                .statusCode(200)
-//                .extract()
-//                .response();
-//
-//        System.out.println(res.getBody().asString());
-//        createdSondage = res.as(SondageDto.class);
-//        assertEquals(createdSondage.getCreateBy(), sondageDto.getCreateBy());
-//        assertEquals(createdSondage.getNom(), sondageDto.getNom());
-//        assertEquals(createdSondage.getCloture(), sondageDto.getCloture());
-//        assertEquals(createdSondage.getFin(), sondageDto.getFin());
-//        assertEquals(createdSondage.getDescription(), sondageDto.getDescription());
 
         //Récupération des meilleurs dates d'un sondage
         //Test si la liste de date est vide

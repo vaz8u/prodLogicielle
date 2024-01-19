@@ -5,6 +5,7 @@ import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.repositories.SondageRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SondageService {
@@ -31,8 +32,12 @@ public class SondageService {
     }
 
     public Sondage update(Long id, Sondage sondage) {
-        if (repository.findById(id).isPresent()) {
+        Optional<Sondage> existingSondageOptional = repository.findById(id);
+        if (existingSondageOptional.isPresent()) {
+            Sondage existingSondage = existingSondageOptional.get();
+
             sondage.setSondageId(id);
+            sondage.setCreateBy(existingSondage.getCreateBy());
             return repository.save(sondage);
         }
         return null;
