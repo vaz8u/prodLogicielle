@@ -64,9 +64,9 @@ class DateSondeeServiceTest {
     void testCreateParams() {
         Long dateSondageId = 1L;
         Long participantId = 2L;
-        Long dateSondeeId= 3L;
-        Participant participant= new Participant();
-        Choix choix= Choix.DISPONIBLE;
+        Long dateSondeeId = 3L;
+        Participant participant = new Participant();
+        Choix choix = Choix.DISPONIBLE;
 
         DateSondage dateSondage = new DateSondage();
         dateSondage.getSondage().setCloture(false);

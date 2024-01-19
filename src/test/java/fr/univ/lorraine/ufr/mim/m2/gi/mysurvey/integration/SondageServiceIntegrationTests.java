@@ -1,9 +1,9 @@
 package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.integration;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Sondage;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.ParticipantService;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.SondageService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,10 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.ParticipantService;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.SondageService;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Sondage;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 @Transactional
@@ -92,7 +91,7 @@ class SondageServiceIntegrationTests {
     @Test
     void editSondageNotFoundShouldBeNull() {
         var res = this.sondageService.update(Long.MIN_VALUE, new Sondage());
-        Assertions.assertEquals(null, res);
+        Assertions.assertNull(res);
     }
 
     @Test
@@ -136,7 +135,7 @@ class SondageServiceIntegrationTests {
 
     @Test
     void getByNotExistingIdShouldBeNull() {
-        Assertions.assertEquals(null, this.sondageService.getById(Long.MIN_VALUE));
+        Assertions.assertNull(this.sondageService.getById(Long.MIN_VALUE));
     }
 
     @Test

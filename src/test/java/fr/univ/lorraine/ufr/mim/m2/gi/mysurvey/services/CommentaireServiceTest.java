@@ -62,7 +62,7 @@ class CommentaireServiceTest {
 
         Commentaire result = commentaireService.addCommantaire(sondageId, participantId, commentaireToCreate);
 
-        assertDto(expectedCommentaire,result);
+        assertDto(expectedCommentaire, result);
 
         verify(sondageService, times(1)).getById(sondageId);
         verify(participantService, times(1)).getById(participantId);
@@ -86,7 +86,7 @@ class CommentaireServiceTest {
 
         Commentaire result = commentaireService.update(commentaireId, updatedCommentaire);
 
-        assertDto(updatedCommentaire,result);
+        assertDto(updatedCommentaire, result);
         assertEquals(expectedComment, result.getCommentaire());
 
         verify(repository, times(1)).findById(commentaireId);

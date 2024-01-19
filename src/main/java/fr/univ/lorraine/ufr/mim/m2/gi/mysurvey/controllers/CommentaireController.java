@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/commentaire")
-@Api(tags="API Commentaire")
+@Api(tags = "API Commentaire")
 public class CommentaireController {
 
     private final CommentaireService service;

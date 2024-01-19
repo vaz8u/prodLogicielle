@@ -39,7 +39,8 @@ public class Sondage {
     @JoinColumn(name = "participant_id")
     private Participant createBy = new Participant();
 
-    public Sondage() {}
+    public Sondage() {
+    }
 
     public Sondage(Long sondageId, String nom, String description, Date fin, Boolean cloture, List<Commentaire> commentaires, List<DateSondage> dateSondage, Participant createBy) {
         this.sondageId = sondageId;

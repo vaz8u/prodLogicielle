@@ -12,7 +12,8 @@ public class SondageDto {
     private Boolean cloture;
     private Long createBy;
 
-    public SondageDto() {}
+    public SondageDto() {
+    }
 
     public Long getSondageId() {
         return sondageId;

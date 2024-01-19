@@ -3,7 +3,10 @@ package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.controllers;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.CommentaireDto;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.DateSondageDto;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.SondageDto;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.*;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Commentaire;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.DateSondage;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Sondage;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.CommentaireService;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.DateSondageService;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.DateSondeeService;
@@ -25,7 +28,8 @@ import java.util.List;
 import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDto;
 import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDtoListSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -53,14 +57,14 @@ class SondageControllerTest {
     void setupMapper() {
         // Configuration du comportement du mapper mock
         lenient().when(mapper.map(Mockito.any(Sondage.class), Mockito.eq(SondageDto.class)))
-            .thenAnswer(invocation -> {
-                Sondage source = invocation.getArgument(0);
-                SondageDto target = new SondageDto();
-                target.setSondageId(source.getSondageId());
-                target.setNom(source.getNom());
-                // Map other properties if needed
-                return target;
-        });
+                .thenAnswer(invocation -> {
+                    Sondage source = invocation.getArgument(0);
+                    SondageDto target = new SondageDto();
+                    target.setSondageId(source.getSondageId());
+                    target.setNom(source.getNom());
+                    // Map other properties if needed
+                    return target;
+                });
     }
 
     @Test
@@ -285,19 +289,19 @@ class SondageControllerTest {
         assertDto(expectedModels, result);
     }
 
-@Test
-@DisplayName("Test getMaybeBest method")
-void testGetMaybeBest() {
-    SondageController sondageController = new SondageController(sondageService, mapper, scommentaire, sdate, request);
-    Long sondageId = 1L;
-    Date date = new Date();
-    Date date1 = new Date();
-    List<Date> expectedModels = request.maybeBestDate(1L);
+    @Test
+    @DisplayName("Test getMaybeBest method")
+    void testGetMaybeBest() {
+        SondageController sondageController = new SondageController(sondageService, mapper, scommentaire, sdate, request);
+        Long sondageId = 1L;
+        Date date = new Date();
+        Date date1 = new Date();
+        List<Date> expectedModels = request.maybeBestDate(1L);
 
-    when(request.maybeBestDate(sondageId)).thenReturn(expectedModels);
+        when(request.maybeBestDate(sondageId)).thenReturn(expectedModels);
 
-    List<Date> result = sondageController.getMaybeBest(sondageId);
+        List<Date> result = sondageController.getMaybeBest(sondageId);
 
-    assertDto(expectedModels, result);
-}
+        assertDto(expectedModels, result);
+    }
 }

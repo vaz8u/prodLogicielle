@@ -1,10 +1,10 @@
 package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services;
 
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Commentaire;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.DateSondage;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Sondage;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.repositories.SondageRepository;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Commentaire;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.DateSondage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +17,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDto;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -91,7 +92,7 @@ class SondageServiceTest {
 
         Sondage result = sondageService.create(1L, sondageToCreate);
 
-        assertDto(sondageToCreate,result);
+        assertDto(sondageToCreate, result);
     }
 
     @Test
