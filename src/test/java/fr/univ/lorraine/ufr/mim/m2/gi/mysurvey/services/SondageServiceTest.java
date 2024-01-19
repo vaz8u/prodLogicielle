@@ -3,6 +3,8 @@ package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Sondage;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.repositories.SondageRepository;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Commentaire;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.DateSondage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,11 +38,11 @@ class SondageServiceTest {
     @DisplayName("Test getById method")
     void testGetById() {
         Sondage sampleSondage = new Sondage();
-        when(repository.getById(anyLong())).thenReturn(sampleSondage);
+        when(repository.findById(anyLong())).thenReturn(Optional.of(sampleSondage));
 
         Sondage result = sondageService.getById(1L);
 
-        assertDto(sampleSondage,result);
+        assertDto(sampleSondage, result);
     }
 
     @Test
@@ -65,6 +68,29 @@ class SondageServiceTest {
 
         Sondage result = sondageService.create(1L, sondageToCreate);
 
+        assertDto(sondageToCreate, result);
+    }
+
+    @Test
+    @DisplayName("Test create method with parameters")
+    void testCreateWithParameters() {
+        Participant sampleParticipant = new Participant();
+        sampleParticipant.setParticipantId(1L);
+        when(participantService.getById(anyLong())).thenReturn(sampleParticipant);
+
+        long sondageId = 1L;
+        String nom = "Nom";
+        String description = "Description";
+        Date fin = new Date();
+        boolean cloture = false;
+        List<Commentaire> commentaires = null;
+        List<DateSondage> dateSondage = null;
+
+        Sondage sondageToCreate = new Sondage(sondageId, nom, description, fin, cloture, commentaires, dateSondage, sampleParticipant);
+        when(repository.save(any(Sondage.class))).thenReturn(sondageToCreate);
+
+        Sondage result = sondageService.create(1L, sondageToCreate);
+
         assertDto(sondageToCreate,result);
     }
 
@@ -85,8 +111,8 @@ class SondageServiceTest {
 
         Sondage result = sondageService.update(sondageId, updatedSondage);
 
-        assertDto(updatedSondage,result);
-        assertEquals(expectedName,result.getNom());
+        assertDto(updatedSondage, result);
+        assertEquals(expectedName, result.getNom());
 
         verify(repository, times(1)).findById(sondageId);
         verify(repository, times(1)).save(updatedSondage);
@@ -137,5 +163,65 @@ class SondageServiceTest {
         assertEquals(0, result, "Sondage should not be deleted");
         verify(repository, times(1)).findById(sondageId);
         verify(repository, never()).deleteById(sondageId);
+    }
+
+    @Test
+    @DisplayName("Test set/get-Description method")
+    void testGetDescription() {
+        String description = "Description";
+
+        Sondage sampleSondage = new Sondage();
+        sampleSondage.setSondageId(1L);
+        sampleSondage.setDescription(description);
+        when(repository.getById(anyLong())).thenReturn(sampleSondage);
+
+        String result = sondageService.getById(1L).getDescription();
+
+        assertEquals(description, result, "Description should be " + description);
+    }
+
+    @Test
+    @DisplayName("Test set/get-Commentaires method")
+    void testGetCommentaires() {
+        List<Commentaire> commentaires = null;
+
+        Sondage sampleSondage = new Sondage();
+        sampleSondage.setSondageId(1L);
+        sampleSondage.setCommentaires(commentaires);
+        when(repository.getById(anyLong())).thenReturn(sampleSondage);
+
+        List<Commentaire> result = sondageService.getById(1L).getCommentaires();
+
+        assertEquals(commentaires, result, "Commentaires should be " + commentaires);
+    }
+
+    @Test
+    @DisplayName("Test set/get-DateSondage method")
+    void testGetDateSondage() {
+        List<DateSondage> dateSondage = null;
+
+        Sondage sampleSondage = new Sondage();
+        sampleSondage.setSondageId(1L);
+        sampleSondage.setDateSondage(dateSondage);
+        when(repository.getById(anyLong())).thenReturn(sampleSondage);
+
+        List<DateSondage> result = sondageService.getById(1L).getDateSondage();
+
+        assertEquals(dateSondage, result, "DateSondage should be " + dateSondage);
+    }
+
+    @Test
+    @DisplayName("Test set/get-CreateBy method")
+    void testGetCreateBy() {
+        Participant createBy = new Participant();
+
+        Sondage sampleSondage = new Sondage();
+        sampleSondage.setSondageId(1L);
+        sampleSondage.setCreateBy(createBy);
+        when(repository.getById(anyLong())).thenReturn(sampleSondage);
+
+        Participant result = sondageService.getById(1L).getCreateBy();
+
+        assertEquals(createBy, result, "CreateBy should be " + createBy);
     }
 }

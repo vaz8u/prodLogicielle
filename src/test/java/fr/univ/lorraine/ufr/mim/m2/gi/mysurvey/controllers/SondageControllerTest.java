@@ -3,12 +3,10 @@ package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.controllers;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.CommentaireDto;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.DateSondageDto;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.SondageDto;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Commentaire;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.DateSondage;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
-import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Sondage;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.*;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.CommentaireService;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.DateSondageService;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.DateSondeeService;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services.SondageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -23,6 +21,7 @@ import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDto;
 import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDtoListSize;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,6 +42,9 @@ class SondageControllerTest {
 
     @Mock
     private ModelMapper mapper;
+
+    @Mock
+    private DateSondeeService request;
 
     @InjectMocks
     private SondageController sondageController;
@@ -247,4 +249,55 @@ class SondageControllerTest {
         verify(mapper, times(1)).map(expectedModel, SondageDto.class);
         verify(sondageService, times(1)).update(sondageId, expectedModel);
     }
+
+    @Test
+    @DisplayName("Test delete Sondage")
+    void testDelete() {
+        Long sondageId = 1L;
+        sondageController.delete(sondageId);
+
+        assertEquals(1, sondageId, "Sondage should be deleted");
+        verify(sondageService, times(1)).delete(sondageId);
+    }
+
+    @Test
+    @DisplayName("Test set-get-fin")
+    void testSetGetFin() {
+        Sondage sondageDto = new Sondage();
+        Date date = new Date();
+        sondageDto.setFin(date);
+        assertEquals(date, sondageDto.getFin());
+    }
+
+    @Test
+    @DisplayName("Test getBest method")
+    void testGetBest() {
+        SondageController sondageController = new SondageController(sondageService, mapper, scommentaire, sdate, request);
+        Long sondageId = 1L;
+        Date date = new Date();
+        Date date1 = new Date();
+        List<Date> expectedModels = request.bestDate(1L);
+
+        when(request.bestDate(sondageId)).thenReturn(expectedModels);
+
+        List<Date> result = sondageController.getBest(sondageId);
+
+        assertDto(expectedModels, result);
+    }
+
+@Test
+@DisplayName("Test getMaybeBest method")
+void testGetMaybeBest() {
+    SondageController sondageController = new SondageController(sondageService, mapper, scommentaire, sdate, request);
+    Long sondageId = 1L;
+    Date date = new Date();
+    Date date1 = new Date();
+    List<Date> expectedModels = request.maybeBestDate(1L);
+
+    when(request.maybeBestDate(sondageId)).thenReturn(expectedModels);
+
+    List<Date> result = sondageController.getMaybeBest(sondageId);
+
+    assertDto(expectedModels, result);
+}
 }

@@ -1,6 +1,9 @@
 package fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.services;
 
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Commentaire;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.DateSondee;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Sondage;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.repositories.ParticipantRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,8 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.util.TestUtil.assertDto;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -31,11 +33,23 @@ class ParticipantServiceTest {
     @DisplayName("Test getById method")
     void testGetById() {
         Participant sampleParticipant = new Participant();
-        when(repository.getById(anyLong())).thenReturn(sampleParticipant);
+        when(repository.findById(anyLong())).thenReturn(Optional.of(sampleParticipant));
 
         Participant result = participantService.getById(1L);
 
-        assertDto(sampleParticipant,result);
+        assertDto(sampleParticipant, result);
+    }
+
+    @Test
+    @DisplayName("Test getNom method")
+    void testGetName() {
+        String nom = "John";
+
+        Participant sampleParticipant = new Participant(1L, "John", "Smith");
+
+        String result = sampleParticipant.getNom();
+
+        assertEquals(nom, result, "Nom should be " + nom);
     }
 
     @Test
@@ -57,6 +71,25 @@ class ParticipantServiceTest {
         when(repository.save(any(Participant.class))).thenReturn(participantToCreate);
 
         Participant result = participantService.create(participantToCreate);
+
+        assertDto(participantToCreate, result);
+    }
+
+    @Test
+    @DisplayName("Test create method with parameters")
+    void testCreateWithParameters() {
+        long participantId = 1L;
+        String prenom = "John";
+        String nom = "Smith";
+
+        Participant participantToCreate = new Participant(participantId, prenom, nom);
+
+        when(repository.save(any(Participant.class))).thenReturn(participantToCreate);
+
+        Participant result = participantService.create(new Participant());
+        result.setParticipantId(participantId);
+        result.setPrenom(prenom);
+        result.setNom(nom);
 
         assertDto(participantToCreate,result);
     }
@@ -130,5 +163,182 @@ class ParticipantServiceTest {
         assertEquals(0, result, "Participant should not be deleted");
         verify(repository, times(1)).findById(participantId);
         verify(repository, never()).deleteById(participantId);
+    }
+
+    @Test
+    @DisplayName("Test setCommentaire method")
+    void testGetCommentaire() {
+        Participant sampleParticipant = new Participant();
+
+        sampleParticipant.setCommentaire(List.of(new Commentaire()));
+
+        List<Commentaire> result = sampleParticipant.getCommentaire();
+
+        assertEquals(1, result.size(), "Number of commentaires should be 1");
+    }
+
+    @Test
+    @DisplayName("Test getCommentaire method")
+    void testSetCommentaire() {
+        Participant sampleParticipant = new Participant();
+
+        Commentaire commentaire = new Commentaire();
+
+        sampleParticipant.setCommentaire(List.of(commentaire));
+
+        List<Commentaire> result = sampleParticipant.getCommentaire();
+
+        assertEquals(commentaire, result.get(0), "Returned Commentaire should match the mocked one");
+    }
+
+    @Test
+    @DisplayName("Test setSondages method")
+    void testGetSondage() {
+        Participant sampleParticipant = new Participant();
+
+        sampleParticipant.setSondages(List.of(new Sondage()));
+
+        List<Sondage> result = sampleParticipant.getSondages();
+
+        assertEquals(1, result.size(), "Number of sondages should be 1");
+    }
+
+    @Test
+    @DisplayName("Test getSondages method")
+    void testSetSondage() {
+        Participant sampleParticipant = new Participant();
+
+        Sondage sondage = new Sondage();
+
+        sampleParticipant.setSondages(List.of(sondage));
+
+        List<Sondage> result = sampleParticipant.getSondages();
+
+        assertEquals(sondage, result.get(0), "Returned Sondage should match the mocked one");
+    }
+
+    @Test
+    @DisplayName("Test setDateSondee method")
+    void testGetDateSondee() {
+        Participant sampleParticipant = new Participant();
+
+        sampleParticipant.setDateSondee(List.of(new DateSondee()));
+
+        List<DateSondee> result = sampleParticipant.getDateSondee();
+
+        assertEquals(1, result.size(), "Number of dateSondee should be 1");
+    }
+
+    @Test
+    @DisplayName("Test equals after all if method")
+    void testEquals() {
+        Commentaire commentaire = new Commentaire();
+        Sondage sondage = new Sondage();
+        DateSondee dateSondee = new DateSondee();
+
+        Participant participant = new Participant();
+        participant.setParticipantId(1L);
+        participant.setPrenom("John");
+        participant.setNom("Smith");
+        participant.setCommentaire(List.of(commentaire));
+        participant.setSondages(List.of(sondage));
+        participant.setDateSondee(List.of(dateSondee));
+
+        Participant participant2 = new Participant();
+        participant2.setParticipantId(1L);
+        participant2.setPrenom("John");
+        participant2.setNom("Smith");
+        participant2.setCommentaire(List.of(commentaire));
+        participant2.setSondages(List.of(sondage));
+        participant2.setDateSondee(List.of(dateSondee));
+        assertEquals(participant, participant2, "Participants should be equal");
+        assertNotEquals(participant, null, "Participant should not be equal to null");
+        assertNotEquals(participant, new Object(), "Participant should not be equal to new Object()");
+
+        // Test different participantId
+        Participant participant3 = new Participant();
+        participant3.setParticipantId(2L); // Different ID
+        participant3.setPrenom("John");
+        participant3.setNom("Smith");
+        participant3.setCommentaire(List.of(commentaire));
+        participant3.setSondages(List.of(sondage));
+        participant3.setDateSondee(List.of(dateSondee));
+        assertNotEquals(participant, participant3, "Participants with different IDs should not be equal");
+
+        // Test different prenom
+        Participant participant4 = new Participant();
+        participant4.setParticipantId(1L);
+        participant4.setPrenom("Jane"); // Different prenom
+        participant4.setNom("Smith");
+        participant4.setCommentaire(List.of(commentaire));
+        participant4.setSondages(List.of(sondage));
+        participant4.setDateSondee(List.of(dateSondee));
+        assertNotEquals(participant, participant4, "Participants with different prenom should not be equal");
+
+        // Test different nom
+        Participant participant5 = new Participant();
+        participant5.setParticipantId(1L);
+        participant5.setPrenom("John");
+        participant5.setNom("Doe"); // Different nom
+        participant5.setCommentaire(List.of(commentaire));
+        participant5.setSondages(List.of(sondage));
+        participant5.setDateSondee(List.of(dateSondee));
+        assertNotEquals(participant, participant5, "Participants with different nom should not be equal");
+
+        // Test different commentaire
+        Participant participant6 = new Participant();
+        participant6.setParticipantId(1L);
+        participant6.setPrenom("John");
+        participant6.setNom("Smith");
+        participant6.setCommentaire(List.of()); // Different commentaire
+        participant6.setSondages(List.of(sondage));
+        participant6.setDateSondee(List.of(dateSondee));
+        assertNotEquals(participant, participant6, "Participants with different commentaire should not be equal");
+
+        // Test different sondage
+        Participant participant7 = new Participant();
+        participant7.setParticipantId(1L);
+        participant7.setPrenom("John");
+        participant7.setNom("Smith");
+        participant7.setCommentaire(List.of(commentaire));
+        participant7.setSondages(List.of()); // Different sondage
+        participant7.setDateSondee(List.of(dateSondee));
+        assertNotEquals(participant, participant7, "Participants with different sondage should not be equal");
+
+        // Test different dateSondee
+        Participant participant8 = new Participant();
+        participant8.setParticipantId(1L);
+        participant8.setPrenom("John");
+        participant8.setNom("Smith");
+        participant8.setCommentaire(List.of(commentaire));
+        participant8.setSondages(List.of(sondage));
+        participant8.setDateSondee(List.of()); // Different dateSondee
+        assertNotEquals(participant, participant8, "Participants with different dateSondee should not be equal");
+    }
+
+    @Test
+    @DisplayName("Test hashCode method")
+    void testHashCode() {
+        Participant participant = new Participant();
+        participant.setParticipantId(1L);
+        participant.setPrenom("John");
+        participant.setNom("Smith");
+
+        int result = participant.hashCode();
+
+        assertEquals(262655257, result, "Hash code should be 262655257");
+    }
+
+    @Test
+    @DisplayName("Test toString method")
+    void testToString() {
+        Participant participant = new Participant();
+        participant.setParticipantId(1L);
+        participant.setPrenom("Smith");
+        participant.setNom("John");
+
+        String result = participant.toString();
+
+        assertEquals("Participant{participantId=1, nom='John', prenom='Smith'}", result, "String should be Participant{participantId=1, nom='John', prenom='Smith'}");
     }
 }
