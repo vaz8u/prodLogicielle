@@ -34,6 +34,9 @@ jobs:
         run: docker ps
       - name: check
         run: docker network ls
+      - name: check2
+        run: docker network inspect {prodlogicielle-web-1}
+        run: docker network inspect {prodlogicielle-db-1}
       - name: Build with Maven
         run: mvn -B package --file pom.xml
       - name: Move jar to root
