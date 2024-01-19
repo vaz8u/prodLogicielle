@@ -33,3 +33,15 @@ jobs:
 
       - name: Run Pitest
         run: mvn org.pitest:pitest-maven:mutationCoverage
+
+      - name: Publish coverage report to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: target/site
+          token: ${{ secrets.ACCES_READ_WRITE }}
+
+      - name: Upload Pitest coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: pitest-report
+          path: target/site/pitest/
