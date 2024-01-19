@@ -33,8 +33,8 @@ jobs:
       - name: Run Project
         run : java -jar target/*.jar &
 
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v4.0.1
+      - name: Pause for 1 minute
+        run: sleep 60
 
       - name: Mutations
         run: mvn clean test org.pitest:pitest-maven:mutationCoverage
