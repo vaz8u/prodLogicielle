@@ -5,11 +5,13 @@ import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.DateSondageDto;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.ParticipantDto;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.dtos.SondageDto;
 import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.models.Participant;
+import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.repositories.ParticipantRepository;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
@@ -30,12 +32,11 @@ public class SondageTestEndToEnd {
     }
 
     @Test
-    void participantTestEndToEnd() {
+    void sondageTestEndToEnd() {
         Response res;
 
         //Création dun participant
         ParticipantDto participantDto = new ParticipantDto();
-        participantDto.setParticipantId(1L);
         participantDto.setNom("Man");
         participantDto.setPrenom("Sam");
         res = given()
@@ -49,6 +50,7 @@ public class SondageTestEndToEnd {
                 .response();
         Participant createdParticipant = res.as(Participant.class);
         Long participantId = createdParticipant.getParticipantId();
+
 
         //Récuperation de tous les sondages
         //Test si la liste de sondages est vide
@@ -118,7 +120,9 @@ public class SondageTestEndToEnd {
         assertEquals(createdSondage.getFin(), sondageDto.getFin());
         assertEquals(createdSondage.getDescription(), sondageDto.getDescription());
 
-        //TODO modification
+
+
+//        //TODO modification
 //        sondageDto.setDescription("Déscription modifié");
 //        sondageDto.setNom("Nom modifié");
 //        res = given()
@@ -127,7 +131,7 @@ public class SondageTestEndToEnd {
 //                .when()
 //                .put(API_BASE_PATH + sondageId)
 //                .then()
-//                .statusCode(500)
+//                .statusCode(200)
 //                .extract()
 //                .response();
 //

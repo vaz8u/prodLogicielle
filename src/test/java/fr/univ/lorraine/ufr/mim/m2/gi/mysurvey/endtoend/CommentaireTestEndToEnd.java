@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Date;
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class CommentaireTestEndToEnd {
@@ -78,20 +79,20 @@ public class CommentaireTestEndToEnd {
         Long commentaireId = createdCommentaire.getCommentaireId();
 
 //TODO Modification
-//        commentaireDto.setCommentaire("Commentaire Test Modifié");
-//        res = given()
-//                .contentType(ContentType.JSON)
-//                .body(commentaireDto)
-//                .when()
-//                .put(API_BASE_PATH + commentaireId)
-//                .then()
-//                .statusCode(200)
-//                .extract()
-//                .response();
-//        createdCommentaire = res.as(CommentaireDto.class);
-//        assertEquals(createdCommentaire.getCommentaireId(), commentaireId);
-//        assertEquals(createdCommentaire.getCommentaireId(), createdCommentaire.getCommentaire());
-//        assertEquals(createdCommentaire.getParticipant(), createdCommentaire.getParticipant());
+        commentaireDto.setCommentaire("Commentaire Test Modifié");
+        res = given()
+                .contentType(ContentType.JSON)
+                .body(commentaireDto)
+                .when()
+                .put(API_BASE_PATH + commentaireId)
+                .then()
+                .statusCode(200)
+                .extract()
+                .response();
+        createdCommentaire = res.as(CommentaireDto.class);
+        assertEquals(createdCommentaire.getCommentaireId(), commentaireId);
+        assertEquals(createdCommentaire.getCommentaire(), createdCommentaire.getCommentaire());
+        assertEquals(createdCommentaire.getParticipant(), createdCommentaire.getParticipant());
 
 
         //Suppression du commentaire

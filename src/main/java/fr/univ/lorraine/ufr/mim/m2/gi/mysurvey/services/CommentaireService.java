@@ -5,6 +5,7 @@ import fr.univ.lorraine.ufr.mim.m2.gi.mysurvey.repositories.CommentaireRepositor
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CommentaireService {
@@ -30,10 +31,17 @@ public class CommentaireService {
     }
 
     public Commentaire update(Long id, Commentaire commentaire) {
-        if (repository.findById(id).isPresent()) {
+        Optional<Commentaire> existingCommentaireOptional = repository.findById(id);
+        if (existingCommentaireOptional.isPresent()) {
+            Commentaire existingCommentaire = existingCommentaireOptional.get();
+
             commentaire.setCommentaireId(id);
+            commentaire.setSondage(existingCommentaire.getSondage());
+            commentaire.setParticipant(existingCommentaire.getParticipant());
+
             return repository.save(commentaire);
         }
+
         return null;
     }
 
