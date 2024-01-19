@@ -32,6 +32,8 @@ jobs:
         run: docker-compose up -d
       - name: Show running containers
         run: docker ps
+      - name: check
+        run: docker network ls
       - name: Build with Maven
         run: mvn -B package --file pom.xml
       - name: Move jar to root
